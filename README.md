@@ -1,0 +1,2 @@
+# SyCinventario
+Proyecto de inventario
