@@ -1,5 +1,12 @@
 <?php
 
+use App\Http\Controllers\InventarioController;
+use App\Http\Controllers\EquipoController;
+use App\Http\Controllers\HerramientaController;
+use App\Http\Controllers\VehiculoController;
+use App\Http\Controllers\MaterialController;
+use App\Http\Controllers\ResponsableController;
+use App\Http\Controllers\MovimientoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,5 +24,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::resource('/inventario', InventarioController::class);
+Route::resource('/equipo', EquipoController::class);
+Route::resource('/herramienta', HerramientaController::class);
+Route::resource('/vehiculo', VehiculoController::class);
+Route::resource('/material', MaterialController::class);
+Route::resource('/responsable', ResponsableController::class);
+Route::resource('/movimiento', MovimientoController::class);
