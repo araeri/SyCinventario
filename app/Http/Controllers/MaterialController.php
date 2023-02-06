@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Material;
 use Illuminate\Http\Request;
+use App\Models\Inventario;
 
 class MaterialController extends Controller
 {
@@ -14,7 +15,9 @@ class MaterialController extends Controller
      */
     public function index()
     {
-        //
+        $materiales = Inventario::join('materials', 'idinventario', '=', 'materials.idinventariofk')->get();
+        //dd($materiales);
+        return view('material.index',compact('materiales'));
     }
 
     /**

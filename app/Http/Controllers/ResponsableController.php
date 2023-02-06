@@ -14,7 +14,9 @@ class ResponsableController extends Controller
      */
     public function index()
     {
-        //
+        $responsables = Responsable::get();
+        //dd($vehiculos);
+        return view('responsable.index',compact('responsables'));
     }
 
     /**

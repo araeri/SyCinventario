@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Herramienta;
+use App\Models\Inventario;
 use Illuminate\Http\Request;
 
 class HerramientaController extends Controller
@@ -14,7 +15,9 @@ class HerramientaController extends Controller
      */
     public function index()
     {
-        //
+        $herramientas = Inventario::where('tipoinventario', '=', 'Herramienta')->get();
+        //dd($equipos);
+        return view('herramienta.index',compact('herramientas'));
     }
 
     /**

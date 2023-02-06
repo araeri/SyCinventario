@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Vehiculo;
+use App\Models\Inventario;
 use Illuminate\Http\Request;
 
 class VehiculoController extends Controller
@@ -14,7 +15,9 @@ class VehiculoController extends Controller
      */
     public function index()
     {
-        //
+        $vehiculos = Inventario::join('vehiculos', 'idinventario', '=', 'vehiculos.idinventariofk')->get();
+        //dd($vehiculos);
+        return view('vehiculo.index',compact('vehiculos'));
     }
 
     /**

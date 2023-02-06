@@ -14,7 +14,9 @@ class MovimientoController extends Controller
      */
     public function index()
     {
-        //
+        $movimientos = Movimiento::get();
+        //dd($vehiculos);
+        return view('vehiculo.index',compact('vehiculos'));
     }
 
     /**
