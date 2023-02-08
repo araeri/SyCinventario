@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Equipo;
+use App\Models\Inventario;
 use Illuminate\Http\Request;
 
 class EquipoController extends Controller
@@ -14,7 +15,9 @@ class EquipoController extends Controller
      */
     public function index()
     {
-        //
+        $equipos = Inventario::where('tipoinventario', '=', 'Equipo')->get();
+        //dd($equipos);
+        return view('equipo.index',compact('equipos'));
     }
 
     /**
@@ -24,7 +27,8 @@ class EquipoController extends Controller
      */
     public function create()
     {
-        //
+        $equipo = new Equipo();
+        return view('equipo.create', compact('equipo'));
     }
 
     /**
@@ -35,7 +39,10 @@ class EquipoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $equipo = $request->except('_token');
+        Inventario::insert($equipo);
+        return redirect()->route('equipo.index');
+        //dd($equipo);
     }
 
     /**
