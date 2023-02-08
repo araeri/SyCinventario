@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Material;
 use Illuminate\Http\Request;
+use App\Models\Inventario;
 
 class MaterialController extends Controller
 {
@@ -14,7 +15,9 @@ class MaterialController extends Controller
      */
     public function index()
     {
-        //
+        $materiales = Inventario::join('materials', 'idinventario', '=', 'materials.idinventariofk')->get();
+        //dd($materiales);
+        return view('material.index',compact('materiales'));
     }
 
     /**
@@ -24,7 +27,8 @@ class MaterialController extends Controller
      */
     public function create()
     {
-        //
+        $material = new Inventario();
+        return view('material.create', compact('material'));
     }
 
     /**
@@ -35,7 +39,18 @@ class MaterialController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //dd($request);
+        $id = Inventario::insertGetId([
+            'codinventario' => $request->codinventario, 'nombreinventario' => $request->nombreinventario, 
+            'tipoinventario'=> $request->tipoinventario, 'fotoinventario' => $request->fotoinventario,
+            'estadoinventario' => $request->estadoinventario, 'informacioninventario' => $request->informacioninventario]
+            
+        );
+        Material::insert([
+            'idinventariofk' => $id, 'cantidadmaterial' => $request->cantidadmaterial
+        ]);
+        return redirect()->route('material.index');
+        
     }
 
     /**
@@ -44,9 +59,13 @@ class MaterialController extends Controller
      * @param  \App\Models\Material  $material
      * @return \Illuminate\Http\Response
      */
-    public function show(Material $material)
+    public function show(Inventario $material)
     {
-        //
+        $materialEleg = Inventario::join('materials', 'idinventario', '=', 'materials.idinventariofk')->where('idinventario', '=', $material->idinventario)->first();
+        //$herramienta = $herramientum;
+        $material = $materialEleg;
+        //dd($material);
+        return view('material.show', compact('material'));
     }
 
     /**
@@ -55,9 +74,13 @@ class MaterialController extends Controller
      * @param  \App\Models\Material  $material
      * @return \Illuminate\Http\Response
      */
-    public function edit(Material $material)
+    public function edit(Inventario $material)
     {
-        //
+        $materialEleg = Inventario::join('materials', 'idinventario', '=', 'materials.idinventariofk')->where('idinventario', '=', $material->idinventario)->first();
+        //$herramienta = $herramientum;
+        $material = $materialEleg;
+        //dd($material);
+        return view('material.edit', compact('material') );
     }
 
     /**
@@ -67,9 +90,21 @@ class MaterialController extends Controller
      * @param  \App\Models\Material  $material
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Material $material)
+    public function update(Request $request, $id)
     {
-        //
+        //dd($id);
+        Inventario::where('idinventario', $id)
+        ->update([
+            'codinventario' => $request->codinventario, 'nombreinventario' => $request->nombreinventario,  
+            'fotoinventario' => $request->fotoinventario, 'estadoinventario' => $request->estadoinventario, 
+            'informacioninventario' => $request->informacioninventario
+        ]);
+        Material::where('idinventariofk', $id)
+        ->update([
+            'cantidadmaterial' => $request->cantidadmaterial
+
+        ]);
+        return redirect()->route('material.index');
     }
 
     /**
@@ -78,8 +113,10 @@ class MaterialController extends Controller
      * @param  \App\Models\Material  $material
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Material $material)
+    public function destroy(Inventario $material)
     {
-        //
+        //dd($material);
+        $material->delete();
+        return redirect()->route('material.index');
     }
 }

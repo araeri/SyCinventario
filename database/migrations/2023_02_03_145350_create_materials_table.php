@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('materials', function (Blueprint $table) {
-            $table->id('idinventariofk');
-            $table->foreign('idinventariofk')->references('idinventario')->on('inventarios');
+            $table->unsignedBigInteger('idinventariofk');
+            $table->foreign('idinventariofk')->references('idinventario')->on('inventarios')->onUpdate('cascade')->onDelete('cascade');
             $table->integer('cantidadmaterial');
             
             $table->timestamps();

@@ -21,6 +21,7 @@
                                 <td>{{ $inventario->nombreinventario }}</td>
                                 <td>{{ $inventario->tipoinventario}}</td>
                                 <td>falta imagen</title></td>
+                                <td>{{ $inventario->estadoinventario}}</td>
                                 <td>{{ $inventario->informacioninventario}}</td>
 
                                 <td>

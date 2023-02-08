@@ -28,7 +28,8 @@ class DatabaseSeeder extends Seeder
             HerramientaSeeder::class,
             VehiculoSeeder::class,
             MaterialSeeder::class,
-            ResponsableSeeder::class
+            ResponsableSeeder::class,
+            MovimientoSeeder::class
         ]);
     }
 }
