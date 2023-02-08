@@ -51,9 +51,11 @@ class EquipoController extends Controller
      * @param  \App\Models\Equipo  $equipo
      * @return \Illuminate\Http\Response
      */
-    public function show(Equipo $equipo)
+    public function show(Inventario $equipo)
     {
-        //
+        $equipo = Inventario::where("idinventario", "=",$equipo->idinventario )->first();
+        //dd($equipo);
+        return view('equipo.show', compact('equipo'));
     }
 
     /**
@@ -62,9 +64,11 @@ class EquipoController extends Controller
      * @param  \App\Models\Equipo  $equipo
      * @return \Illuminate\Http\Response
      */
-    public function edit(Equipo $equipo)
+    public function edit(Inventario $equipo)
     {
-        //
+        //dd($equipo);
+
+        return view('equipo.edit', compact('equipo') );
     }
 
     /**
@@ -74,9 +78,13 @@ class EquipoController extends Controller
      * @param  \App\Models\Equipo  $equipo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Equipo $equipo)
+    public function update(Request $request, $idinventario)
     {
-        //
+        $datosEquipo = $request->except(['_token','_method']);
+        Inventario::where('idinventario','=', $idinventario)->update($datosEquipo);
+
+        //$herramienta = Inventario::findOrFail($idinventario);
+        return redirect()->route('equipo.index');
     }
 
     /**
@@ -85,8 +93,10 @@ class EquipoController extends Controller
      * @param  \App\Models\Equipo  $equipo
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Equipo $equipo)
+    public function destroy(Inventario $equipo)
     {
-        //
+        //dd($equipo);
+        $equipo->delete();
+        return redirect()->route('equipo.index');
     }
 }

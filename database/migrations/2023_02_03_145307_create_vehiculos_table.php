@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('vehiculos', function (Blueprint $table) {
             $table->unsignedBigInteger('idinventariofk');
-            $table->foreign('idinventariofk')->references('idinventario')->on('inventarios');
+            $table->foreign('idinventariofk')->references('idinventario')->on('inventarios')->onUpdate('cascade')->onDelete('cascade');
             $table->string('tipovehiculo');
             $table->string('patentevehiculo');
 

@@ -23,9 +23,9 @@
                                 <td>{{ $herramienta->informacioninventario}}</td>
 
                                 <td>
-                                    <form action="#" method="POST">
-                                        <a class="btn btn-sm btn-primary " href="#"><i class="fa fa-fw fa-eye"></i> Mostrar</a>
-                                        <a class="btn btn-sm btn-success" href="#"><i class="fa fa-fw fa-edit"></i> Editar</a>
+                                    <a class="btn btn-sm btn-success" href="{{ route('herramienta.edit', $herramienta->idinventario)}}"><i class="fa fa-fw fa-edit"></i> Editar</a>
+                                    <form action="{{ route('herramienta.destroy',$herramienta->idinventario) }}" method="POST">
+                                        <a class="btn btn-sm btn-primary " href="{{ route('herramienta.show',$herramienta->idinventario) }}"><i class="fa fa-fw fa-eye"></i> Mostrar</a>
                                         {{ csrf_field() }}
                                         {{ method_field('DELETE') }}
                                         <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modal"><i class="fa fa-fw fa-trash"></i> Borrar</button>

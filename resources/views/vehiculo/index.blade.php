@@ -27,9 +27,9 @@
                                 <td>{{ $vehiculo->informacioninventario}}</td>
 
                                 <td>
-                                    <form action="#" method="POST">
-                                        <a class="btn btn-sm btn-primary " href="#"><i class="fa fa-fw fa-eye"></i> Mostrar</a>
-                                        <a class="btn btn-sm btn-success" href="#"><i class="fa fa-fw fa-edit"></i> Editar</a>
+                                    <form action="{{ route('vehiculo.destroy',$vehiculo->idinventario) }}" method="POST">
+                                        <a class="btn btn-sm btn-primary " href="{{ route('vehiculo.show',$vehiculo->idinventario) }}"><i class="fa fa-fw fa-eye"></i> Mostrar</a>
+                                        <a class="btn btn-sm btn-success" href="{{ route('vehiculo.edit', $vehiculo->idinventario)}}"><i class="fa fa-fw fa-edit"></i> Editar</a>
                                         {{ csrf_field() }}
                                         {{ method_field('DELETE') }}
                                         <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modal"><i class="fa fa-fw fa-trash"></i> Borrar</button>

@@ -21,7 +21,7 @@
         <div class="row">
             <div class="col-md-8 mb-3">
                 {{ Form::label('Tipo Inventario') }}
-                {{ Form::text('tipoinventario', $equipo->tipoinventario, ['class' => 'form-control' . ($errors->has('nomDireccion') ? ' is-invalid' : ''), 'placeholder' => 'Estado Equipo']) }}
+                {{ Form::text('tipoinventario', 'Equipo', ['class' => 'form-control' . ($errors->has('nomDireccion') ? ' is-invalid' : ''), 'placeholder' => 'Estado Equipo', 'readonly' => 'true']) }}
                 {!! $errors->first('nomDireccion', '<div class="invalid-feedback">:message</div>') !!}
             </div>
             <div class="col-md-8 mb-3">

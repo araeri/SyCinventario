@@ -18,8 +18,8 @@ return new class extends Migration
             $table->unsignedBigInteger('idinventariofk');
             $table->unsignedBigInteger('idresponsablefk');
             $table->primary(['idresponsablefk','idinventariofk']);
-            $table->foreign('idinventariofk')->references('idinventario')->on('inventarios');
-            $table->foreign('idresponsablefk')->references('idresponsable')->on('responsables');
+            $table->foreign('idinventariofk')->references('idinventario')->on('inventarios')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('idresponsablefk')->references('idresponsable')->on('responsables')->onUpdate('cascade')->onDelete('cascade');
             
             $table->string('tipomovimiento');
             $table->string('seleccioninventario');

@@ -35,7 +35,7 @@ Route::delete('/users/{user}', [App\Http\Controllers\UserController::class, 'des
 
 Route::resource('/inventario', InventarioController::class);
 Route::resource('/equipo', EquipoController::class);
-Route::resource('/herramienta', HerramientaController::class);
+Route::resource('herramienta', HerramientaController::class);
 Route::resource('/vehiculo', VehiculoController::class);
 Route::resource('/material', MaterialController::class);
 Route::resource('/responsable', ResponsableController::class);

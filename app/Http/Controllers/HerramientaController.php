@@ -27,7 +27,8 @@ class HerramientaController extends Controller
      */
     public function create()
     {
-        //
+        $herramienta = new Herramienta();
+        return view('herramienta.create', compact('herramienta'));
     }
 
     /**
@@ -38,7 +39,10 @@ class HerramientaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $herramienta = $request->except('_token');
+        Inventario::insert($herramienta);
+        return redirect()->route('herramienta.index');
+        //dd($equipo);
     }
 
     /**
@@ -47,9 +51,13 @@ class HerramientaController extends Controller
      * @param  \App\Models\Herramienta  $herramienta
      * @return \Illuminate\Http\Response
      */
-    public function show(Herramienta $herramienta)
+    public function show(Inventario $herramientum)
     {
-        //
+        //$id = strval($idNum);
+        $herramienta = Inventario::where("idinventario", "=",$herramientum->idinventario )->first();
+        //dd($herramienta);
+        //$estudiantes = Registro::where("idEs", "=", Estudiante::select("id"));
+        return view('herramienta.show', compact('herramienta'));
     }
 
     /**
@@ -58,9 +66,12 @@ class HerramientaController extends Controller
      * @param  \App\Models\Herramienta  $herramienta
      * @return \Illuminate\Http\Response
      */
-    public function edit(Herramienta $herramienta)
+    public function edit(Inventario $herramientum)
     {
-        //
+        //dd($herramientum);
+        $herramienta = $herramientum;
+
+        return view('herramienta.edit', compact('herramienta') );
     }
 
     /**
@@ -70,9 +81,15 @@ class HerramientaController extends Controller
      * @param  \App\Models\Herramienta  $herramienta
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Herramienta $herramienta)
+    public function update(Request $request, $idinventario)
     {
-        //
+        $datosHerramienta = $request->except(['_token','_method']);
+        //dd($id);
+        Inventario::where('idinventario','=', $idinventario)->update($datosHerramienta);
+
+        //$herramienta = Inventario::findOrFail($idinventario);
+        //return view('estudiante.edit', compact('estudiante') );
+        return redirect()->route('herramienta.index');
     }
 
     /**
@@ -81,8 +98,10 @@ class HerramientaController extends Controller
      * @param  \App\Models\Herramienta  $herramienta
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Herramienta $herramienta)
+    public function destroy(Inventario $herramientum)
     {
-        //
+        //dd($herramientum);
+        $herramientum->delete();
+        return redirect()->route('herramienta.index');
     }
 }
