@@ -10,45 +10,32 @@
                 @method('PUT')
                 <div class="card">
                     <div class="card-header card-header-primary">
-                        <h4 class="card-title">Usuario</h4>
-                        <p class="card-category">Editar datos</p>
+                        Editar datos
                     </div>
                     <div class="card-body">
-                        <div class="row">
-                            <label for="name" class="col-sm-2 col">Nombre</label>
-                            <div class="col-sm7">
-                                <input type="text" class="form-control" name="name" value="{{ $user->name }}">
-                            </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" name="name" value="{{ $user->name }}" placeholder="Nombre">
+                            <label for="name">Nombre</label>
                         </div>
-                        <div class="row">
-                            <label for="lastname" class="col-sm-2 col">Apellido</label>
-                            <div class="col-sm7">
-                                <input type="text" class="form-control" name="lastname" value="{{ $user->lastname }}">
-                            </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" name="lastname" value="{{ $user->lastname }}" placeholder="Apellido">
+                            <label for="lastname">Apellido</label>
                         </div>
-                        <div class="row">
-                            <label for="tipodeusuario" class="col-sm-2 col">Tipo de usuario</label>
-                            <div class="col-sm7">
-                                <input type="text" class="form-control" name="tipodeusuario" value="{{ $user->tipodeusuario }}">
-                            </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" name="tipodeusuario" value="{{ $user->tipodeusuario }}" placeholder="Tipo Usuario">
+                            <label for="tipodeusuario" class="col-sm-2 col">Tipo de Usuario</label>
                         </div>
-                        <div class="row">
-                            <label for="email" class="col-sm-2 col">email</label>
-                            <div class="col-sm7">
-                                <input type="text" class="form-control" name="email" value="{{ $user->email }}">
-                            </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" name="email" value="{{ $user->email }}" placeholder="Email">
+                            <label for="email">Email</label>
                         </div>
-                        <div class="row">
-                            <label for="username" class="col-sm-2 col">Nombre de usuario</label>
-                            <div class="col-sm7">
-                                <input type="text" class="form-control" name="username" value="{{ $user->username }}">
-                            </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" name="username" value="{{ $user->username }}" placeholder="Nombre Usuario">
+                            <label for="username">Nombre de usuario</label>
                         </div>
-                        <div class="row">
-                            <label for="password" class="col-sm-2 col">contraseña</label>
-                            <div class="col-sm7">
-                                <input type="password" class="form-control" name="password" placeholder="Ingrese su contraseña solo en caso de modificarla">
-                            </div>
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control" name="password" placeholder="Ingrese su contraseña solo en caso de modificarla">
+                            <label for="password">contraseña</label>
                         </div>
                     </div>
                     <!--Footer-->
