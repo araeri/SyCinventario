@@ -7,8 +7,8 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header card-header-primary">
-                        <h4 class="card-title">Usuarios</h4>
-                        <p class="card-category">usuarios lista</p>
+                        Usuarios
+                        <!-- <p class="card-category">usuarios lista</p> -->
                     </div>
                     <div class="card-body">
                         @if(session('success'))
@@ -18,19 +18,19 @@
                         @endif
                         <div class = "row">
                             <div class="col-12 text-left">
-                                <a href="{{route('users.create')}}" class="btn btn-sm btn-primary">añadir usuario</a>
+                                <a href="{{route('users.create')}}" class="btn btn-sm btn-primary my-4 float-end">Añadir Usuario</a>
                             </div>
                         </div>
                         <div class="table-responsive">
-                            <table class="table">
-                                <thead class="text-primary">
-                                    <th>nombre</th>
-                                    <th>apellido</th>
-                                    <th>Tipo de usuario</th>
-                                    <th>email</th>
-                                    <th>Nombre de usuario</th>
+                            <table class="table align-middle table-hover table-borderless">
+                                <thead class="bg-secondary text-white">
+                                    <th>Nombre</th>
+                                    <th>Apellido</th>
+                                    <th>Tipo de Usuario</th>
+                                    <th>Email</th>
+                                    <th>Nombre de Usuario</th>
                                     <th>Creado en</th>
-                                    <th>Accion</th>
+                                    <th></th>
                                 </thead>
                                 <tbody>
                                     @foreach ($users as $user)
@@ -43,12 +43,14 @@
                                         <td>{{$user->username}}</td>
                                         <td>{{$user->created_at}}</td>
                                         <td class="text-right"> 
-                                            <a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning">Editar</a>
-                                            <form action="{{ route('users.delete',$user->id) }}" method="POST" style="display: inline" onsubmit="return confirm('¿ Seguro de eliminar al usuario ?')">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button class="btn btn-danger" type="submit">Borrar</button>
-                                            </form>
+                                            <ul class="pagination pagination-sm">
+                                                <a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning rounded-start btn-sm">Editar</a>
+                                                <form action="{{ route('users.delete',$user->id) }}" method="POST" style="display: inline" onsubmit="return confirm('¿ Seguro de eliminar al usuario ?')">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="btn btn-danger rounded-end btn-sm" type="submit">Borrar</button>
+                                                </form>
+                                            </ul>
                                         </td>
                                     </tr>
                                     @endforeach
