@@ -29,7 +29,8 @@ class MovimientoController extends Controller
      */
     public function create()
     {
-        //
+        $movimiento = new Movimiento();
+        return view('movimiento.create', compact('movimiento'));
     }
 
     /**
@@ -40,7 +41,12 @@ class MovimientoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Movimiento::insert([
+            'idinventariofk' => $request->idinventariofk, 'idresponsablefk' => $request->idresponsablefk, 
+            'tipomovimiento'=> $request->tipomovimiento, 'seleccioninventario' => $request->seleccioninventario,
+            'fechamovimiento' => now()        
+        ]);
+        return redirect()->route('herramienta.index');
     }
 
     /**

@@ -3,43 +3,28 @@
         
         <div class="row">
             <div class="col-md-4 mb-3">
-                {{ Form::label('Codigo Material') }}
-                {{ Form::text('codinventario', $material->codinventario, ['class' => 'form-control' . ($errors->has('RUN') ? ' is-invalid' : ''), 'placeholder' => 'Codigo Equipo']) }}
+                {{ Form::label('Id Inventario') }}
+                {{ Form::text('idinventariofk', $movimiento->idinventariofk, ['class' => 'form-control' . ($errors->has('RUN') ? ' is-invalid' : ''), 'placeholder' => 'Codigo Equipo']) }}
                 {!! $errors->first('RUN', '<div class="invalid-feedback">:message</div>') !!}
             </div>
             <div class="col-md-4 mb-3">
-                {{ Form::label('Nombre Material') }}
-                {{ Form::text('nombreinventario', $material->nombreinventario, ['class' => 'form-control' . ($errors->has('nombre') ? ' is-invalid' : ''), 'placeholder' => 'Nombre Equipo']) }}
+                {{ Form::label('Id Responsable') }}
+                {{ Form::text('idresponsablefk', $movimiento->idresponsablefk, ['class' => 'form-control' . ($errors->has('nombre') ? ' is-invalid' : ''), 'placeholder' => 'Nombre Equipo']) }}
                 {!! $errors->first('nombre', '<div class="invalid-feedback">:message</div>') !!}
-            </div>
-            <div class="col-md-4 mb-3">
-                {{ Form::label('Foto Material') }}
-                {{ Form::file('fotoinventario') }}
-                {!! $errors->first('apellido', '<div class="invalid-feedback">:message</div>') !!}
             </div>
         </div>
         <div class="row">
             <div class="col-md-8 mb-3">
-                {{ Form::label('Tipo Inventario') }}
-                {{ Form::text('tipoinventario', 'Material', ['class' => 'form-control' . ($errors->has('nomDireccion') ? ' is-invalid' : ''), 'placeholder' => 'Estado Equipo', 'readonly' => 'true']) }}
+                {{ Form::label('Tipo Movimiento') }}
+                {{ Form::text('tipomovimiento', $movimiento->tipomovimiento, ['class' => 'form-control' . ($errors->has('nomDireccion') ? ' is-invalid' : ''), 'placeholder' => 'Estado Equipo']) }}
                 {!! $errors->first('nomDireccion', '<div class="invalid-feedback">:message</div>') !!}
             </div>
             <div class="col-md-8 mb-3">
-                {{ Form::label('Estado Material') }}
-                {{ Form::text('estadoinventario', $material->estadoinventario, ['class' => 'form-control' . ($errors->has('nomDireccion') ? ' is-invalid' : ''), 'placeholder' => 'Estado Equipo']) }}
+                {{ Form::label('Seleccion Inventario') }}
+                {{ Form::text('seleccioninventario', $movimiento->seleccioninventario, ['class' => 'form-control' . ($errors->has('nomDireccion') ? ' is-invalid' : ''), 'placeholder' => 'Estado Equipo']) }}
                 {!! $errors->first('nomDireccion', '<div class="invalid-feedback">:message</div>') !!}
             </div>
-            <div class="col-md-8 mb-3">
-                {{ Form::label('Informacion Material') }}
-                {{ Form::text('informacioninventario', $material->informacioninventario, ['class' => 'form-control' . ($errors->has('nomDireccion') ? ' is-invalid' : ''), 'placeholder' => 'Estado Equipo']) }}
-                {!! $errors->first('nomDireccion', '<div class="invalid-feedback">:message</div>') !!}
-            </div>
-            <div class="col-md-8 mb-3">
-                {{ Form::label('Cantidad Material') }}
-                {{ Form::number('cantidadmaterial', $material->cantidadmaterial, ['class' => 'form-control' . ($errors->has('nomDireccion') ? ' is-invalid' : ''), 'placeholder' => 'Estado Equipo']) }}
-                {!! $errors->first('nomDireccion', '<div class="invalid-feedback">:message</div>') !!}
-            </div>
-            
+            <div>NO ESTA TERMINADO EL RELLENO DE DATOS A</div>
             
             
         </div>
