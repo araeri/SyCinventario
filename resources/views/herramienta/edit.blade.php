@@ -1,3 +1,5 @@
+@extends('layouts.app')
+@section('content')
 <div class="card mt-4">
             <div class="card-header">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -18,3 +20,4 @@
                 </form>
             </div>
         </div>
+@endsection
