@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Movimiento;
+use App\Models\Responsable;
 use Illuminate\Http\Request;
 
 class MovimientoController extends Controller
@@ -14,9 +15,11 @@ class MovimientoController extends Controller
      */
     public function index()
     {
-        $movimientos = Movimiento::get();
-        //dd($vehiculos);
-        return view('vehiculo.index',compact('vehiculos'));
+        $movimientos = Movimiento::join('responsables', 'idresponsablefk', '=', 'responsables.idresponsable')
+        ->join('inventarios', 'idinventariofk', '=', 'inventarios.idinventario')
+        ->get();
+        //dd($movimientos);
+        return view('movimiento.index',compact('movimientos'));
     }
 
     /**
@@ -48,7 +51,13 @@ class MovimientoController extends Controller
      */
     public function show(Movimiento $movimiento)
     {
-        //
+        $responsables = Responsable::where('idresponsable', '=', $movimiento->idresponsablefk)->first();
+        $movimientos = Movimiento::join('responsables', 'idresponsablefk', '=', 'responsables.idresponsable')
+        ->join('inventarios', 'idinventariofk', '=', 'inventarios.idinventario')
+        ->where('idresponsablefk','=', $movimiento->idresponsablefk)
+        ->get();
+        //dd($movimientos);
+        return view('movimiento.show', compact('movimientos'), compact('responsables'));
     }
 
     /**

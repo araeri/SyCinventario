@@ -18,7 +18,9 @@
                                 <td>{{ $equipo->idinventario}}</td>
                                 <td>{{ $equipo->codinventario }}</td>
                                 <td>{{ $equipo->nombreinventario }}</td>
-                                <td>falta imagen</td>
+                                <td>
+                                    <img src="{{ asset('/Imagenes/'.$equipo->fotoinventario)}}" alt="{{$equipo->fotoinventario}}">
+                                </td>
                                 <td>{{ $equipo->estadoinventario}}</td>
                                 <td>{{ $equipo->informacioninventario}}</td>
 

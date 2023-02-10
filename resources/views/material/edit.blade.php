@@ -10,7 +10,7 @@
                 </div>
             </div>
             <div class="card-body">
-                <form method="post" action="{{ url('/material/'.$material->idinventariofk) }}">
+                <form method="post" action="{{ url('/material/'.$material->idinventariofk) }}" enctype="multipart/form-data">
                     @csrf
                     {{ method_field('PATCH')}}
                     

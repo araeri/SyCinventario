@@ -18,7 +18,9 @@
                                 <td>{{ $herramienta->idinventario}}</td>
                                 <td>{{ $herramienta->codinventario }}</td>
                                 <td>{{ $herramienta->nombreinventario }}</td>
-                                <td>falta imagen</td>
+                                <td>
+                                    <img src="{{asset('/Imagenes/'.$herramienta->fotoinventario)}}" alt="No imagen">
+                                </td>
                                 <td>{{ $herramienta->estadoinventario}}</td>
                                 <td>{{ $herramienta->informacioninventario}}</td>
 

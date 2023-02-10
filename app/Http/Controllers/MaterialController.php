@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Material;
 use Illuminate\Http\Request;
 use App\Models\Inventario;
+use Illuminate\Support\Facades\File;
 
 class MaterialController extends Controller
 {
@@ -40,12 +41,20 @@ class MaterialController extends Controller
     public function store(Request $request)
     {
         //dd($request);
+        if ($request->hasfile('fotoinventario')) {
+
+            $file = $request->file('fotoinventario');
+            $extention = $file->getClientOriginalExtension();
+            $filename = '/'.time().'.'.$extention;
+            $file->move(public_path().'/Imagenes', $filename);
+            //dd($filename);
+        }
         $id = Inventario::insertGetId([
             'codinventario' => $request->codinventario, 'nombreinventario' => $request->nombreinventario, 
-            'tipoinventario'=> $request->tipoinventario, 'fotoinventario' => $request->fotoinventario,
-            'estadoinventario' => $request->estadoinventario, 'informacioninventario' => $request->informacioninventario]
-            
-        );
+            'tipoinventario'=> $request->tipoinventario, 'fotoinventario' => $filename,
+            'estadoinventario' => $request->estadoinventario, 'informacioninventario' => $request->informacioninventario
+        
+        ]);
         Material::insert([
             'idinventariofk' => $id, 'cantidadmaterial' => $request->cantidadmaterial
         ]);
@@ -93,10 +102,22 @@ class MaterialController extends Controller
     public function update(Request $request, $id)
     {
         //dd($id);
+        $Material = Inventario::find($id);
+        if ($request->hasfile('fotoinventario')) {
+            $destination = storage_path('Imagenes\\'.$Material->fotoinventario);
+            if (File::exists($destination)) {
+                File::delete($destination);
+            }
+
+            $file = $request->file('fotoinventario');
+            $extention = $file->getClientOriginalExtension();
+            $filename = '/'.time().'.'.$extention;
+            $file->move(public_path().'/Imagenes', $filename);
+        }
         Inventario::where('idinventario', $id)
         ->update([
             'codinventario' => $request->codinventario, 'nombreinventario' => $request->nombreinventario,  
-            'fotoinventario' => $request->fotoinventario, 'estadoinventario' => $request->estadoinventario, 
+            'fotoinventario' => $filename, 'estadoinventario' => $request->estadoinventario, 
             'informacioninventario' => $request->informacioninventario
         ]);
         Material::where('idinventariofk', $id)
@@ -115,6 +136,11 @@ class MaterialController extends Controller
      */
     public function destroy(Inventario $material)
     {
+        $Material = Inventario::find($material->idinventario);
+        $destination = storage_path('Imagenes\\'.$Material->fotoinventario);
+            if (File::exists($destination)) {
+                File::delete($destination);
+            }
         //dd($material);
         $material->delete();
         return redirect()->route('material.index');
