@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Herramienta;
 use App\Models\Inventario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class HerramientaController extends Controller
 {
@@ -39,8 +40,21 @@ class HerramientaController extends Controller
      */
     public function store(Request $request)
     {
+        if ($request->hasfile('fotoinventario')) {
+
+            $file = $request->file('fotoinventario');
+            $extention = $file->getClientOriginalExtension();
+            $filename = '/'.time().'.'.$extention;
+            $file->move(public_path().'/Imagenes', $filename);
+            //dd($filename);
+        }
         $herramienta = $request->except('_token');
-        Inventario::insert($herramienta);
+        Inventario::insert([
+            'codinventario' => $request->codinventario, 'nombreinventario' => $request->nombreinventario, 
+            'tipoinventario'=> $request->tipoinventario, 'fotoinventario' => $filename,
+            'estadoinventario' => $request->estadoinventario, 'informacioninventario' => $request->informacioninventario
+        
+        ]);
         return redirect()->route('herramienta.index');
         //dd($equipo);
     }
@@ -83,9 +97,26 @@ class HerramientaController extends Controller
      */
     public function update(Request $request, $idinventario)
     {
+        $Herramienta = Inventario::find($idinventario);
+        if ($request->hasfile('fotoinventario')) {
+            $destination = storage_path('Imagenes\\'.$Herramienta->fotoinventario);
+            if (File::exists($destination)) {
+                File::delete($destination);
+            }
+
+            $file = $request->file('fotoinventario');
+            $extention = $file->getClientOriginalExtension();
+            $filename = '/'.time().'.'.$extention;
+            $file->move(public_path().'/Imagenes', $filename);
+        }
         $datosHerramienta = $request->except(['_token','_method']);
         //dd($id);
-        Inventario::where('idinventario','=', $idinventario)->update($datosHerramienta);
+        Inventario::where('idinventario','=', $idinventario)->update([
+            'codinventario' => $request->codinventario, 'nombreinventario' => $request->nombreinventario, 
+            'tipoinventario'=> $request->tipoinventario, 'fotoinventario' => $filename,
+            'estadoinventario' => $request->estadoinventario, 'informacioninventario' => $request->informacioninventario
+        
+        ]);
 
         //$herramienta = Inventario::findOrFail($idinventario);
         //return view('estudiante.edit', compact('estudiante') );
@@ -100,6 +131,11 @@ class HerramientaController extends Controller
      */
     public function destroy(Inventario $herramientum)
     {
+        $Equipo = Inventario::find($herramientum->idinventario);
+        $destination = storage_path('Imagenes\\'.$Equipo->fotoinventario);
+            if (File::exists($destination)) {
+                File::delete($destination);
+            }
         //dd($herramientum);
         $herramientum->delete();
         return redirect()->route('herramienta.index');

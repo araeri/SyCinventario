@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Vehiculo;
 use App\Models\Inventario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class VehiculoController extends Controller
 {
@@ -39,9 +40,17 @@ class VehiculoController extends Controller
      */
     public function store(Request $request)
     {
+        if ($request->hasfile('fotoinventario')) {
+
+            $file = $request->file('fotoinventario');
+            $extention = $file->getClientOriginalExtension();
+            $filename = '/'.time().'.'.$extention;
+            $file->move(public_path().'/Imagenes', $filename);
+            //dd($filename);
+        }
         $id = Inventario::insertGetId([
             'codinventario' => $request->codinventario, 'nombreinventario' => $request->nombreinventario, 
-            'tipoinventario'=> $request->tipoinventario, 'fotoinventario' => $request->fotoinventario,
+            'tipoinventario'=> $request->tipoinventario, 'fotoinventario' => $filename,
             'estadoinventario' => $request->estadoinventario, 'informacioninventario' => $request->informacioninventario]
             
         );    
@@ -93,10 +102,22 @@ class VehiculoController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $Vehiculo = Inventario::find($id);
+        if ($request->hasfile('fotoinventario')) {
+            $destination = storage_path('Imagenes\\'.$Vehiculo->fotoinventario);
+            if (File::exists($destination)) {
+                File::delete($destination);
+            }
+
+            $file = $request->file('fotoinventario');
+            $extention = $file->getClientOriginalExtension();
+            $filename = '/'.time().'.'.$extention;
+            $file->move(public_path().'/Imagenes', $filename);
+        }
         Inventario::where('idinventario', $id)
         ->update([
             'codinventario' => $request->codinventario, 'nombreinventario' => $request->nombreinventario,  
-            'fotoinventario' => $request->fotoinventario, 'estadoinventario' => $request->estadoinventario, 
+            'fotoinventario' => $filename, 'estadoinventario' => $request->estadoinventario, 
             'informacioninventario' => $request->informacioninventario
         ]);
         Vehiculo::where('idinventariofk', $id)
@@ -115,6 +136,11 @@ class VehiculoController extends Controller
      */
     public function destroy(Inventario $vehiculo)
     {
+        $Vehiculo = Inventario::find($vehiculo->idinventario);
+        $destination = storage_path('Imagenes\\'.$Vehiculo->fotoinventario);
+            if (File::exists($destination)) {
+                File::delete($destination);
+            }
         //dd($vehiculo);
         $vehiculo->delete();
         return redirect()->route('vehiculo.index');

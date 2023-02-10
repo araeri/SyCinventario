@@ -14,7 +14,7 @@
             </div>
             <div class="col-md-4 mb-3">
                 {{ Form::label('Foto Inventario') }}
-                {{ Form::text('fotoinventario', $equipo->fotoinventario, ['class' => 'form-control' . ($errors->has('apellido') ? ' is-invalid' : ''), 'placeholder' => 'Foto Equipo']) }}
+                {{ Form::file('fotoinventario')}}
                 {!! $errors->first('apellido', '<div class="invalid-feedback">:message</div>') !!}
             </div>
         </div>
