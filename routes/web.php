@@ -32,6 +32,8 @@ Route::get('/users/{user}/edit', [App\Http\Controllers\UserController::class, 'e
 Route::put('/users/{user}', [App\Http\Controllers\UserController::class, 'update'])->name('users.update');
 Route::delete('/users/{user}', [App\Http\Controllers\UserController::class, 'destroy'])->name('users.delete');
 
+Route::get('/movimiento/pdf', [MovimientoController::class, 'pdf'])->name('movimiento.pdf');
+
 
 Route::resource('/inventario', InventarioController::class);
 Route::resource('/equipo', EquipoController::class);
