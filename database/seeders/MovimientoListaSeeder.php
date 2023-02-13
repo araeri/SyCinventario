@@ -2,14 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\MovimientoLista;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Inventario;
-use App\Models\Movimiento;
-use App\Models\Responsable;
-use Faker\Factory as Faker;
 
-class MovimientoSeeder extends Seeder
+class MovimientoListaSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -18,6 +15,6 @@ class MovimientoSeeder extends Seeder
      */
     public function run()
     {
-        Movimiento::factory()->count(20)->create();
+        MovimientoLista::factory()->count(20)->create();
     }
 }

@@ -14,16 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('movimientos', function (Blueprint $table) {
-            
-            $table->unsignedBigInteger('idinventariofk');
-            $table->unsignedBigInteger('idresponsablefk');
+            $table->id('idmovimiento');
+            $table->string('entregamovimiento');
+            $table->string('recepcionmovimiento');
+            $table->string('razonmovimiento');
             $table->string('tipomovimiento');
-            $table->primary(['idresponsablefk','idinventariofk', 'tipomovimiento']);
-            $table->foreign('idinventariofk')->references('idinventario')->on('inventarios')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('idresponsablefk')->references('idresponsable')->on('responsables')->onUpdate('cascade')->onDelete('cascade');
             
-            
-            $table->string('seleccioninventario');
             $table->date('fechamovimiento');
             
             

@@ -3,14 +3,19 @@
         
         <div class="row">
             <div class="col-md-4 mb-3">
-                {{ Form::label('Id Inventario') }}
-                {{ Form::text('idinventariofk', $movimiento->idinventariofk, ['class' => 'form-control' . ($errors->has('RUN') ? ' is-invalid' : ''), 'placeholder' => 'Codigo Equipo']) }}
-                {!! $errors->first('RUN', '<div class="invalid-feedback">:message</div>') !!}
+                {{ Form::label('Nombre Entrega') }}
+                {{ Form::text('nomentresponsable', $movimiento->nomentresponsable, ['class' => 'form-control' . ($errors->has('nombre') ? ' is-invalid' : ''), 'placeholder' => 'Nombre Equipo']) }}
+                {!! $errors->first('nombre', '<div class="invalid-feedback">:message</div>') !!}
             </div>
             <div class="col-md-4 mb-3">
-                {{ Form::label('Id Responsable') }}
-                {{ Form::text('idresponsablefk', $movimiento->idresponsablefk, ['class' => 'form-control' . ($errors->has('nombre') ? ' is-invalid' : ''), 'placeholder' => 'Nombre Equipo']) }}
+                {{ Form::label('Nombre Recepción') }}
+                {{ Form::text('nomrecepresponsable', $movimiento->nomrecepresponsable, ['class' => 'form-control' . ($errors->has('nombre') ? ' is-invalid' : ''), 'placeholder' => 'Nombre Equipo']) }}
                 {!! $errors->first('nombre', '<div class="invalid-feedback">:message</div>') !!}
+            </div>
+            <div class="col-md-4 mb-3">
+                {{ Form::label('Id Inventario') }}
+                {{ Form::text('razonresponsable', $movimiento->razonresponsable, ['class' => 'form-control' . ($errors->has('RUN') ? ' is-invalid' : ''), 'placeholder' => 'Codigo Equipo']) }}
+                {!! $errors->first('RUN', '<div class="invalid-feedback">:message</div>') !!}
             </div>
         </div>
         <div class="row">
