@@ -7,6 +7,7 @@ use App\Http\Controllers\VehiculoController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\ResponsableController;
 use App\Http\Controllers\MovimientoController;
+use App\Http\Controllers\MovimientoListaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,3 +41,4 @@ Route::resource('/vehiculo', VehiculoController::class);
 Route::resource('/material', MaterialController::class);
 Route::resource('/responsable', ResponsableController::class);
 Route::resource('/movimiento', MovimientoController::class);
+Route::resource('/movimientolista', MovimientoListaController::class);

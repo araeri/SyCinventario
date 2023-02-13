@@ -4,22 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\Movimiento;
 use App\Models\MovimientoLista;
-use App\Models\Responsable;
 use Illuminate\Http\Request;
 
-class MovimientoController extends Controller
+class MovimientoListaController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
     public function index()
     {
-        $movimientos = Movimiento::get();
-        //dd($movimientos);
-        return view('movimiento.index',compact('movimientos'));
     }
 
     /**
@@ -29,8 +24,7 @@ class MovimientoController extends Controller
      */
     public function create()
     {
-        $movimiento = new Movimiento();
-        return view('movimiento.create', compact('movimiento'));
+        //
     }
 
     /**
@@ -41,35 +35,28 @@ class MovimientoController extends Controller
      */
     public function store(Request $request)
     {
-        
-        Movimiento::insert([
-            'entregamovimiento' => $request->entregamovimiento, 'recepcionmovimiento' => $request->recepcionmovimiento, 
-            'razonmovimiento'=> $request->razonmovimiento, 'tipomovimiento' => $request->tipoinventario,
-            'fechamovimiento' => now()        
-        ]);
-        return redirect()->route('movimiento.index');
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Movimiento  $movimiento
+     * @param  \App\Models\MovimientoLista  $movimientoLista
      * @return \Illuminate\Http\Response
      */
-    public function show(Movimiento $movimiento)
+    public function show(Movimiento $movimientolistum)
     {
-        $listaMovimientos = MovimientoLista::where('idmovimientofk','=', $movimiento->idmovimiento)->get();
-        dd($listaMovimientos);
+        $listaMovimientos = MovimientoLista::where('idmovimientofk','=', $movimientolistum->idmovimiento)->get();
         return view('movimientolista.show', compact('listaMovimientos'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Movimiento  $movimiento
+     * @param  \App\Models\MovimientoLista  $movimientoLista
      * @return \Illuminate\Http\Response
      */
-    public function edit(Movimiento $movimiento)
+    public function edit(MovimientoLista $movimientoLista)
     {
         //
     }
@@ -78,10 +65,10 @@ class MovimientoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Movimiento  $movimiento
+     * @param  \App\Models\MovimientoLista  $movimientoLista
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Movimiento $movimiento)
+    public function update(Request $request, MovimientoLista $movimientoLista)
     {
         //
     }
@@ -89,10 +76,10 @@ class MovimientoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Movimiento  $movimiento
+     * @param  \App\Models\MovimientoLista  $movimientoLista
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Movimiento $movimiento)
+    public function destroy(MovimientoLista $movimientoLista)
     {
         //
     }

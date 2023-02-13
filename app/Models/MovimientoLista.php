@@ -5,8 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Movimiento extends Model
+class MovimientoLista extends Model
 {
     use HasFactory;
-    protected $primaryKey = 'idmovimiento';
+    protected $primaryKey = 'idlista';
+    protected $table = 'movimientolistas';
 }
