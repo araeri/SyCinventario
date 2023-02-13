@@ -15,7 +15,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-5">
-                    <img src="{{asset('/Imagenes/'.$herramienta->fotoinventario)}}" class="img-thumbnail" alt="No imagen" style="width: 400px; height: 400px;">
+                    <img src="{{asset('/Imagenes/'.$herramienta->fotoinventario)}}" class="img" alt="No imagen" style="width: 400px; height: 400px;">
                 </div>
                 <div class="col">
                     <div class="row">

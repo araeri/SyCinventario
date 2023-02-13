@@ -9,8 +9,7 @@
                 @csrf
                 <div class="card">
                     <div class="card-header card-header-primary">
-                        <h4 class="card-title">Usuario</h4>
-                        <p class="card-category">Ingresar datos</p>
+                        Ingresar datos
                     </div>
                     <div class="card-body">
                         <div class="row">
