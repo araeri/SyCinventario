@@ -22,7 +22,7 @@
 </head>
 <body class="sb-nav-fixed" style="background-color: gainsboro;">  
     <nav class="sb-topnav navbar navbar-expand navbar-light bg-white shadow-sm">
-        <a class="navbar-brand ps-3" href="{{ url('/') }}">
+        <a class="navbar-brand ps-3" href="{{ url('/home') }}">
             <img src="https://cdn.discordapp.com/attachments/1069978226975309986/1070401530332729434/AIorK4w0dbRTTqbtRkmfUxqrdJxi9KlngoafI1mlnRH3AY0wClHj3CTwQWQyopGqEW9Hu3jFIGCMgOM.png" alt="" height="70">    
         <!-- {{ config('app.name', 'Laravel') }} -->
         </a>
@@ -53,7 +53,7 @@
                 @endif
             @else
                 <li class="nav-item">
-                    <a class="nav-link" href="#!">Informes de Movimiento</a>
+                    <a class="nav-link" href="{{ route('movimiento.index') }}">Informes de Movimiento</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#!">Ingresos</a>
@@ -62,7 +62,7 @@
                     <a class="nav-link" href="#!">Retiros</a>
                 </li>
                 <li class=" dropdown">
-                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                    <a id="navbarDropdown" class="nav-link dropdown-toggle pe-3" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                         {{ Auth::user()->name }}
                     </a>
 
@@ -94,19 +94,19 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
                             Usuarios
                         </a>
-                        <a class="nav-link mt-2" href="">
+                        <a class="nav-link mt-2" href="{{ route('vehiculo.index') }}">
                             <div class="sb-nav-link-icon"><i class="fas fa-car"></i></div>
                             Vehiculos
                         </a>
-                        <a class="nav-link mt-2" href="">
+                        <a class="nav-link mt-2" href="{{ route('equipo.index') }}">
                             <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
                             Equipos
                         </a>
-                        <a class="nav-link mt-2" href="">
+                        <a class="nav-link mt-2" href="{{ route('herramienta.index') }}">
                             <div class="sb-nav-link-icon"><i class="fas fa-screwdriver-wrench"></i></div>
                             Herramientas
                         </a>
-                        <a class="nav-link mt-2" href="">
+                        <a class="nav-link mt-2" href="{{ route('material.index') }}">
                             <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
                             Materiales
                         </a>
