@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Herramienta;
+use App\Models\MovimientoLista;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -29,7 +30,8 @@ class DatabaseSeeder extends Seeder
             VehiculoSeeder::class,
             MaterialSeeder::class,
             ResponsableSeeder::class,
-            MovimientoSeeder::class
+            MovimientoSeeder::class,
+            MovimientoListaSeeder::class
         ]);
     }
 }

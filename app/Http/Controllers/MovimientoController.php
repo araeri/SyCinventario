@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Inventario;
 use App\Models\Movimiento;
+use App\Models\MovimientoLista;
 use App\Models\Responsable;
 use Illuminate\Http\Request;
 
@@ -13,11 +15,10 @@ class MovimientoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
-        $movimientos = Movimiento::join('responsables', 'idresponsablefk', '=', 'responsables.idresponsable')
-        ->join('inventarios', 'idinventariofk', '=', 'inventarios.idinventario')
-        ->get();
+        $movimientos = Movimiento::get();
         //dd($movimientos);
         return view('movimiento.index',compact('movimientos'));
     }
@@ -30,7 +31,11 @@ class MovimientoController extends Controller
     public function create()
     {
         $movimiento = new Movimiento();
-        return view('movimiento.create', compact('movimiento'));
+        $numero = Movimiento::max('idmovimiento') +1;
+        $inventario = Inventario::get();
+        $selectedItems = '';
+        //dd($inventario);
+        return view('movimiento.create', compact('movimiento','numero','inventario','selectedItems'));
     }
 
     /**
@@ -41,12 +46,24 @@ class MovimientoController extends Controller
      */
     public function store(Request $request)
     {
-        Movimiento::insert([
-            'idinventariofk' => $request->idinventariofk, 'idresponsablefk' => $request->idresponsablefk, 
-            'tipomovimiento'=> $request->tipomovimiento, 'seleccioninventario' => $request->seleccioninventario,
-            'fechamovimiento' => now()        
+        $seleccionitems = json_decode(request('selected-items'), true);
+        $idmov = Movimiento::insertGetId([
+            'entregamovimiento' => $request->entregamovimiento, 'recepcionmovimiento' => $request->recepcionmovimiento, 
+            'razonmovimiento'=> $request->razonmovimiento, 'tipomovimiento' => $request->tipomovimiento,
+            'fechamovimiento' => now(), 'codmovimiento' => $request->codmovimiento  
         ]);
-        return redirect()->route('herramienta.index');
+        
+        foreach ($seleccionitems as $item){
+            MovimientoLista::insert([
+                'codinventario' => $item['codinventario'],
+                'nombreinventario' => $item['nombreinventario'],
+                'fotoinventario' => $item['fotoinventario'],
+                'tipoinventario' => $item['tipoinventario'],
+                'idmovimientofk' => $idmov
+            ]);
+        }
+
+        return redirect()->route('movimiento.index');
     }
 
     /**
@@ -57,13 +74,6 @@ class MovimientoController extends Controller
      */
     public function show(Movimiento $movimiento)
     {
-        $responsables = Responsable::where('idresponsable', '=', $movimiento->idresponsablefk)->first();
-        $movimientos = Movimiento::join('responsables', 'idresponsablefk', '=', 'responsables.idresponsable')
-        ->join('inventarios', 'idinventariofk', '=', 'inventarios.idinventario')
-        ->where('idresponsablefk','=', $movimiento->idresponsablefk)
-        ->get();
-        //dd($movimientos);
-        return view('movimiento.show', compact('movimientos'), compact('responsables'));
     }
 
     /**

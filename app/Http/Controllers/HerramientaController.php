@@ -29,7 +29,8 @@ class HerramientaController extends Controller
     public function create()
     {
         $herramienta = new Herramienta();
-        return view('herramienta.create', compact('herramienta'));
+        $numero = Inventario::max('idinventario') +1;
+        return view('herramienta.create', compact('herramienta'), compact('numero'));
     }
 
     /**
@@ -83,9 +84,10 @@ class HerramientaController extends Controller
     public function edit(Inventario $herramientum)
     {
         //dd($herramientum);
+        $numero = null;
         $herramienta = $herramientum;
 
-        return view('herramienta.edit', compact('herramienta') );
+        return view('herramienta.edit', compact('herramienta'), compact('numero') );
     }
 
     /**
