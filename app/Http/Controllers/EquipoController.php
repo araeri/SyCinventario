@@ -16,7 +16,7 @@ class EquipoController extends Controller
      */
     public function index()
     {
-        $equipos = Inventario::where('tipoinventario', '=', 'Equipo')->get();
+        $equipos = Inventario::where('tipoinventario', '=', 'Equipo')->get() ;
         //dd($equipos);
         return view('equipo.index',compact('equipos'));
     }
@@ -29,7 +29,9 @@ class EquipoController extends Controller
     public function create()
     {
         $equipo = new Equipo();
-        return view('equipo.create', compact('equipo'));
+        $numero = Inventario::max('idinventario') +1;
+
+        return view('equipo.create', compact('equipo'), compact('numero'));
     }
 
     /**
@@ -80,8 +82,8 @@ class EquipoController extends Controller
     public function edit(Inventario $equipo)
     {
         //dd($equipo);
-
-        return view('equipo.edit', compact('equipo') );
+        $numero = null;
+        return view('equipo.edit', compact('equipo'), compact('numero') );
     }
 
     /**

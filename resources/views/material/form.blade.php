@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-md-4 mb-3">
                 {{ Form::label('Codigo Material') }}
-                {{ Form::text('codinventario', $material->codinventario, ['class' => 'form-control' . ($errors->has('RUN') ? ' is-invalid' : ''), 'placeholder' => 'Codigo Equipo']) }}
+                {{ Form::text('codinventario', $material->codinventario ?? 'Inv-'.str_pad(strval($numero), 6, '0', STR_PAD_LEFT) , ['class' => 'form-control' . ($errors->has('codinventario') ? ' is-invalid' : ''), 'placeholder' => 'Codigo Equipo', 'readonly' => 'true']) }}
                 {!! $errors->first('RUN', '<div class="invalid-feedback">:message</div>') !!}
             </div>
             <div class="col-md-4 mb-3">
