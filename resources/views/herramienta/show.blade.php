@@ -14,10 +14,10 @@
     <div class="card-body">
         <div class="container">
             <div class="row">
-                <div class="col-5">
-                    <img src="{{asset('/Imagenes/'.$herramienta->fotoinventario)}}" class="img" alt="No imagen" style="width: 400px; height: 400px;">
+                <div class="col-md-4">
+                    <img src="{{asset('/Imagenes/'.$herramienta->fotoinventario)}}" class="img-thumbnail" alt="No imagen">
                 </div>
-                <div class="col">
+                <div class="col-md-8">
                     <div class="row">
                         <div class="col-6">
                             <h6 class="fw-bold">IDENTIFICADOR</h6>
