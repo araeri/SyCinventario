@@ -16,6 +16,7 @@
                 {{ Form::label('Foto Inventario') }}
                 {{ Form::file('fotoinventario')}}
                 {!! $errors->first('fotoinventario', '<div class="invalid-feedback">:message</div>') !!}
+
             </div>
         </div>
         <div class="row">

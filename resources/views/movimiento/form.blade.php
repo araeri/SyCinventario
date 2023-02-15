@@ -30,6 +30,11 @@
                     @endforeach
                 </select>
             </div>
+            <div class="col-md-4 mb-3">
+                {{ Form::label('Id Inventario') }}
+                {{ Form::text('razonresponsable', $movimiento->razonresponsable, ['class' => 'form-control' . ($errors->has('RUN') ? ' is-invalid' : ''), 'placeholder' => 'Codigo Equipo']) }}
+                {!! $errors->first('RUN', '<div class="invalid-feedback">:message</div>') !!}
+            </div>
         </div>
         <div class="row">
             <div class="col-md-8 mb-3">

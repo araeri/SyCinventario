@@ -7,6 +7,8 @@ use App\Models\Movimiento;
 use App\Models\MovimientoLista;
 use App\Models\Responsable;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
+
 
 class MovimientoController extends Controller
 {
@@ -108,5 +110,10 @@ class MovimientoController extends Controller
     public function destroy(Movimiento $movimiento)
     {
         //
+    }
+    public function pdf(){
+        $movimientos=Movimiento::all();
+        $pdf = Pdf::loadview('movimiento.pdf',compact('movimientos'));
+        return $pdf->stream();
     }
 }
