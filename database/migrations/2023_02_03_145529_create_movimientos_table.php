@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('movimientos', function (Blueprint $table) {
             $table->id('idmovimiento');
+            $table->string('codmovimiento');
+
             $table->string('entregamovimiento');
             $table->string('recepcionmovimiento');
             $table->string('razonmovimiento');

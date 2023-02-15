@@ -74,8 +74,9 @@ class VehiculoController extends Controller
         $vehiculoEleg = Inventario::join('vehiculos', 'idinventario', '=', 'vehiculos.idinventariofk')->where('idinventario', '=', $vehiculo->idinventario)->first();
         //$herramienta = $herramientum;
         $vehiculo = $vehiculoEleg;
+        $numero = Inventario::max('idinventario') +1;
         //dd($material);
-        return view('vehiculo.show', compact('vehiculo'));
+        return view('vehiculo.show', compact('vehiculo'), compact('numero'));
     }
 
     /**
@@ -89,8 +90,9 @@ class VehiculoController extends Controller
         $vehiculoEleg = Inventario::join('vehiculos', 'idinventario', '=', 'vehiculos.idinventariofk')->where('idinventario', '=', $vehiculo->idinventario)->first();
         //$herramienta = $herramientum;
         $vehiculo = $vehiculoEleg;
+        $numero = null;
         //dd($vehiculo);
-        return view('vehiculo.edit', compact('vehiculo') );
+        return view('vehiculo.edit', compact('vehiculo'), compact('numero') );
     }
 
     /**

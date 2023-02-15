@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Inventario;
 use App\Models\Movimiento;
 use App\Models\MovimientoLista;
 use App\Models\Responsable;
@@ -32,7 +33,11 @@ class MovimientoController extends Controller
     public function create()
     {
         $movimiento = new Movimiento();
-        return view('movimiento.create', compact('movimiento'));
+        $numero = Movimiento::max('idmovimiento') +1;
+        $inventario = Inventario::get();
+        $selectedItems = '';
+        //dd($inventario);
+        return view('movimiento.create', compact('movimiento','numero','inventario','selectedItems'));
     }
 
     /**
@@ -43,12 +48,23 @@ class MovimientoController extends Controller
      */
     public function store(Request $request)
     {
-        
-        Movimiento::insert([
+        $seleccionitems = json_decode(request('selected-items'), true);
+        $idmov = Movimiento::insertGetId([
             'entregamovimiento' => $request->entregamovimiento, 'recepcionmovimiento' => $request->recepcionmovimiento, 
-            'razonmovimiento'=> $request->razonmovimiento, 'tipomovimiento' => $request->tipoinventario,
-            'fechamovimiento' => now()        
+            'razonmovimiento'=> $request->razonmovimiento, 'tipomovimiento' => $request->tipomovimiento,
+            'fechamovimiento' => now(), 'codmovimiento' => $request->codmovimiento  
         ]);
+        
+        foreach ($seleccionitems as $item){
+            MovimientoLista::insert([
+                'codinventario' => $item['codinventario'],
+                'nombreinventario' => $item['nombreinventario'],
+                'fotoinventario' => $item['fotoinventario'],
+                'tipoinventario' => $item['tipoinventario'],
+                'idmovimientofk' => $idmov
+            ]);
+        }
+
         return redirect()->route('movimiento.index');
     }
 
@@ -60,9 +76,6 @@ class MovimientoController extends Controller
      */
     public function show(Movimiento $movimiento)
     {
-        $listaMovimientos = MovimientoLista::where('idmovimientofk','=', $movimiento->idmovimiento)->get();
-        dd($listaMovimientos);
-        return view('movimientolista.show', compact('listaMovimientos'));
     }
 
     /**

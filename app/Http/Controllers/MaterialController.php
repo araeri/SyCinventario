@@ -29,7 +29,8 @@ class MaterialController extends Controller
     public function create()
     {
         $material = new Inventario();
-        return view('material.create', compact('material'));
+        $numero = Inventario::max('idinventario') +1;
+        return view('material.create', compact('material'), compact('numero'));
     }
 
     /**
@@ -88,8 +89,9 @@ class MaterialController extends Controller
         $materialEleg = Inventario::join('materials', 'idinventario', '=', 'materials.idinventariofk')->where('idinventario', '=', $material->idinventario)->first();
         //$herramienta = $herramientum;
         $material = $materialEleg;
+        $numero = null;
         //dd($material);
-        return view('material.edit', compact('material') );
+        return view('material.edit', compact('material'), compact('numero') );
     }
 
     /**
