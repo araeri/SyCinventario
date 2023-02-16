@@ -34,6 +34,7 @@ Route::put('/users/{user}', [App\Http\Controllers\UserController::class, 'update
 Route::delete('/users/{user}', [App\Http\Controllers\UserController::class, 'destroy'])->name('users.delete');
 
 Route::get('/movimiento/pdf', [MovimientoController::class, 'pdf'])->name('movimiento.pdf');
+Route::post('/movimiento/filtro', [MovimientoController::class, 'search'])->name('movimiento.search');
 
 
 Route::resource('/inventario', InventarioController::class);

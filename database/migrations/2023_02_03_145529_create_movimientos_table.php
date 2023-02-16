@@ -19,7 +19,7 @@ return new class extends Migration
 
             $table->string('entregamovimiento');
             $table->string('recepcionmovimiento');
-            $table->string('razonmovimiento');
+            $table->text('razonmovimiento');
             $table->string('tipomovimiento');
             
             $table->date('fechamovimiento');

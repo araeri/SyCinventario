@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('tipoinventario');
             $table->string('fotoinventario');
             $table->string('estadoinventario');
-            $table->string('informacioninventario');
+            $table->text('informacioninventario');
             
             $table->timestamps();
         });

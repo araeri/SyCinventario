@@ -8,6 +8,7 @@ use App\Models\MovimientoLista;
 use App\Models\Responsable;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 
 
 class MovimientoController extends Controller
@@ -115,5 +116,41 @@ class MovimientoController extends Controller
         $movimientos=Movimiento::all();
         $pdf = Pdf::loadview('movimiento.pdf',compact('movimientos'));
         return $pdf->stream();
+    }
+    public function search(Request $request){
+
+
+        $fromDate = $request->input('fromDate');
+        $toDate   = $request->input('toDate');
+        $dato1 = $request->input('boton1');
+        $dato2 = $request->input('boton2');
+        $listamov = movimientolista::all();
+        /**('idmovimientofk','=', $movimiento->idmovimiento) */
+        if ($dato1 == 1){
+        /**$query = Movimiento::where('fechamovimiento','>=',$fromDate)
+        ->where('fechamovimiento','<=',$toDate) codigo que funciona*/
+        /**$query = Movimiento::table('movimiento')
+                ->join('movimientolista','movimiento.idmovimiento','=','movimientolista.idmovimientofk')
+                ->select('movimiento.*')
+                ->get();
+                dd($query);*/
+        $query = Movimiento::join('movimientolistas','movimientolistas.idmovimientofk','=','idmovimiento')
+            ->where('movimientos.fechamovimiento','>=',$fromDate)
+            ->where('movimientos.fechamovimiento','<=',$toDate)
+            ->get();
+        return view('movimiento.filtro',compact('query'));
+        }
+        else{
+
+            $query = Movimiento::join('movimientolistas','movimientolistas.idmovimientofk','=','idmovimiento')
+            ->where('movimientos.fechamovimiento','>=',$fromDate)
+            ->where('movimientos.fechamovimiento','<=',$toDate)
+            ->get();
+        $pdf = Pdf::loadview('movimiento.filtro',compact('query'));
+        
+        return $pdf->stream();
+        }
+        
+
     }
 }
