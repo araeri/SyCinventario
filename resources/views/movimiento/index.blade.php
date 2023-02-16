@@ -9,42 +9,37 @@
                 <!--<a href="{{ route('movimiento.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
                     <i class="fas fa-add"></i> {{ __('Nuevo') }}
                 </a>--->
-                <form action="{{ route('movimiento.search')}}" method="POST">
-    @csrf  
-    <br>
-    <div class="container">
-        <div class="row">
-            <div class="container-fluid">
-                <div class="form-group row">
-
-                    <label for="date" class="col-form-label col-sm-2">Informes desde</label>
-                    <div class="col-sm-3">
-                        <input type="date" class="form-control input-sm" id="fromDate" name="fromDate" required>
-                    </div>
-                    <label for="date" class="col-form-label col-sm-2">Informes hasta</label>
-                    <div class="col-sm-3">
-                        <input type="date" class="form-control input-sm" id="toDate" name="toDate" required>
-                    </div>
-                    <div class="col-sm-2">
-                    <button type="submit" id="boton1" name="boton1" value="1" >Buscar por Fecha</button>
-                    </div>
-                    <div class="col-sm-2">
-                    <button type="submit" id="boton2" name="boton2" value="2" >Generar PDF</button>
-                    </div>
-                    
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-</form>
             </div>
         </div>
     </div>
     <div class="card-body">
-        <div class="table-responsive">
+        <form action="{{ route('movimiento.search')}}" method="POST">
+            @csrf  
+            <br>
+            <div class="container">
+                <div class="row">
+                    <div class="container-fluid">
+                        <div class="form-group row">
+                            <label for="date" class="col-form-label col-sm-2">Informes desde</label>
+                            <div class="col-sm-2">
+                                <input type="date" class="form-control input-sm" id="fromDate" name="fromDate" required>
+                            </div>
+                            <label for="date" class="col-form-label col-sm-2">Informes hasta</label>
+                            <div class="col-sm-2">
+                                <input type="date" class="form-control input-sm" id="toDate" name="toDate" required>
+                            </div>
+                            <div class="col-sm-2">
+                            <button class="btn btn btn-secondary" type="submit" id="boton1" name="boton1" value="1" >Buscar por Fecha</button>
+                            </div>
+                            <div class="col-sm-2">
+                            <button class="btn btn-danger" type="submit" id="boton2" name="boton2" value="2" >Generar PDF</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="table-responsive mt-3">
             <table class="table align-middle bg-white table-hover table-borderless">
                 <thead class="bg-light text-secondary">
                     <tr>
