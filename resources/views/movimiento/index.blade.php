@@ -36,6 +36,10 @@
                             <td>{{ $movimiento->fechamovimiento}}</td>
                             <td>
                                     <a class="btn btn-sm btn-primary " href="{{ route('movimientolista.show',$movimiento->idmovimiento) }}"><i class="fa fa-fw fa-eye"></i> Mostrar</a>
+                                    @if($movimiento->tipomovimiento == 'Salida')
+                                    <a class="btn btn-sm btn-primary " href="{{ route('movimiento.entrada',$movimiento->idmovimiento) }}"><i class="fa fa-fw fa-eye"></i> Crear Recepción</a>
+                                    @endif
+
                             </td>
                         </tr>
                     @endforeach

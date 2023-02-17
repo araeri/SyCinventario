@@ -9,7 +9,7 @@
             </div>
             <div class="col-md-4 mb-3">
                 {{ Form::label('Nombre Vehiculo') }}
-                {{ Form::text('nombreinventario', $vehiculo->nombreinventario, ['class' => 'form-control' . ($errors->has('nombre') ? ' is-invalid' : ''), 'placeholder' => 'Nombre Equipo']) }}
+                {{ Form::text('nombreinventario', $vehiculo->nombreinventario ?? '', ['class' => 'form-control' . ($errors->has('nombre') ? ' is-invalid' : ''), 'id' => 'nombre-vehiculo', 'placeholder' => 'Nombre Equipo']) }}
                 {!! $errors->first('nombre', '<div class="invalid-feedback">:message</div>') !!}
             </div>
             <div class="col-md-4 mb-3">
@@ -25,23 +25,18 @@
                 {!! $errors->first('nomDireccion', '<div class="invalid-feedback">:message</div>') !!}
             </div>
             <div class="col-md-8 mb-3">
-                {{ Form::label('Estado Vehiculo') }}
-                {{ Form::text('estadoinventario', $vehiculo->estadoinventario, ['class' => 'form-control' . ($errors->has('nomDireccion') ? ' is-invalid' : ''), 'placeholder' => 'Estado Equipo']) }}
-                {!! $errors->first('nomDireccion', '<div class="invalid-feedback">:message</div>') !!}
-            </div>
-            <div class="col-md-8 mb-3">
                 {{ Form::label('Informacion Vehiculo') }}
-                {{ Form::text('informacioninventario', $vehiculo->informacioninventario, ['class' => 'form-control' . ($errors->has('nomDireccion') ? ' is-invalid' : ''), 'placeholder' => 'Estado Equipo']) }}
+                {{ Form::text('informacioninventario', $vehiculo->informacioninventario ?? '', ['class' => 'form-control' . ($errors->has('nomDireccion') ? ' is-invalid' : ''), 'id' => 'informacion-vehiculo', 'placeholder' => 'Estado Equipo']) }}
                 {!! $errors->first('nomDireccion', '<div class="invalid-feedback">:message</div>') !!}
             </div>
             <div class="col-md-8 mb-3">
                 {{ Form::label('Tipo Vehiculo') }}
-                {{ Form::text('tipovehiculo', $vehiculo->tipovehiculo, ['class' => 'form-control' . ($errors->has('nomDireccion') ? ' is-invalid' : ''), 'placeholder' => 'Estado Equipo']) }}
+                {{ Form::text('tipovehiculo', $vehiculo->tipovehiculo ?? '', ['class' => 'form-control' . ($errors->has('nomDireccion') ? ' is-invalid' : ''), 'id'=> 'tipo-vehiculo', 'placeholder' => 'Estado Equipo']) }}
                 {!! $errors->first('nomDireccion', '<div class="invalid-feedback">:message</div>') !!}
             </div>
             <div class="col-md-8 mb-3">
                 {{ Form::label('Patente Vehiculo') }}
-                {{ Form::text('patentevehiculo', $vehiculo->patentevehiculo, ['class' => 'form-control' . ($errors->has('nomDireccion') ? ' is-invalid' : ''), 'placeholder' => 'Estado Equipo']) }}
+                {{ Form::text('patentevehiculo', $vehiculo->patentevehiculo ?? '', ['class' => 'form-control' . ($errors->has('nomDireccion') ? ' is-invalid' : ''), 'id' => 'patente-vehiculo', 'placeholder' => 'Estado Equipo']) }}
                 {!! $errors->first('nomDireccion', '<div class="invalid-feedback">:message</div>') !!}
             </div>
             

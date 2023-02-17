@@ -53,7 +53,7 @@ class HerramientaController extends Controller
         Inventario::insert([
             'codinventario' => $request->codinventario, 'nombreinventario' => $request->nombreinventario, 
             'tipoinventario'=> $request->tipoinventario, 'fotoinventario' => $filename,
-            'estadoinventario' => $request->estadoinventario, 'informacioninventario' => $request->informacioninventario
+            'estadoinventario' => 'En Buenas Condiciones', 'informacioninventario' => $request->informacioninventario
         
         ]);
         return redirect()->route('herramienta.index');

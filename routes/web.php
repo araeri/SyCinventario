@@ -43,4 +43,7 @@ Route::resource('/vehiculo', VehiculoController::class);
 Route::resource('/material', MaterialController::class);
 Route::resource('/responsable', ResponsableController::class);
 Route::resource('/movimiento', MovimientoController::class);
+Route::get('/movimiento/entrada/{movimiento}', [MovimientoController::class , 'entrada'])->name('movimiento.entrada');
+Route::post('/movimiento/entrada', [MovimientoController::class , 'entradainventario'])->name('movimiento.entradainventario');
+
 Route::resource('/movimientolista', MovimientoListaController::class);

@@ -41,7 +41,12 @@ class MaterialController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request);
+        if ($request->cantidadmaterial > 0) {
+            $estadoInv = 'Con Existencias';
+        }
+        else {
+            $estadoInv = 'Sin Existencias';
+        }
         if ($request->hasfile('fotoinventario')) {
 
             $file = $request->file('fotoinventario');
@@ -53,7 +58,7 @@ class MaterialController extends Controller
         $id = Inventario::insertGetId([
             'codinventario' => $request->codinventario, 'nombreinventario' => $request->nombreinventario, 
             'tipoinventario'=> $request->tipoinventario, 'fotoinventario' => $filename,
-            'estadoinventario' => $request->estadoinventario, 'informacioninventario' => $request->informacioninventario
+            'estadoinventario' => $estadoInv, 'informacioninventario' => $request->informacioninventario
         
         ]);
         Material::insert([
@@ -103,7 +108,12 @@ class MaterialController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //dd($id);
+        if ($request->cantidadmaterial > 0) {
+            $estadoInv = 'Con Existencias';
+        }
+        else {
+            $estadoInv = 'Sin Existencias';
+        }
         $Material = Inventario::find($id);
         if ($request->hasfile('fotoinventario')) {
             $destination = storage_path('Imagenes\\'.$Material->fotoinventario);
@@ -119,7 +129,7 @@ class MaterialController extends Controller
         Inventario::where('idinventario', $id)
         ->update([
             'codinventario' => $request->codinventario, 'nombreinventario' => $request->nombreinventario,  
-            'fotoinventario' => $filename, 'estadoinventario' => $request->estadoinventario, 
+            'fotoinventario' => $filename, 'estadoinventario' => $estadoInv, 
             'informacioninventario' => $request->informacioninventario
         ]);
         Material::where('idinventariofk', $id)

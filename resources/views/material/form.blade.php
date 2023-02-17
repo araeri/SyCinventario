@@ -9,7 +9,7 @@
             </div>
             <div class="col-md-4 mb-3">
                 {{ Form::label('Nombre Material') }}
-                {{ Form::text('nombreinventario', $material->nombreinventario, ['class' => 'form-control' . ($errors->has('nombre') ? ' is-invalid' : ''), 'placeholder' => 'Nombre Equipo']) }}
+                {{ Form::text('nombreinventario', $material->nombreinventario ?? '', ['class' => 'form-control' . ($errors->has('nombre') ? ' is-invalid' : ''), 'id' => 'nombre-material', 'placeholder' => 'Nombre Equipo']) }}
                 {!! $errors->first('nombre', '<div class="invalid-feedback">:message</div>') !!}
             </div>
             <div class="col-md-4 mb-3">
@@ -25,18 +25,13 @@
                 {!! $errors->first('nomDireccion', '<div class="invalid-feedback">:message</div>') !!}
             </div>
             <div class="col-md-8 mb-3">
-                {{ Form::label('Estado Material') }}
-                {{ Form::text('estadoinventario', $material->estadoinventario, ['class' => 'form-control' . ($errors->has('nomDireccion') ? ' is-invalid' : ''), 'placeholder' => 'Estado Equipo']) }}
-                {!! $errors->first('nomDireccion', '<div class="invalid-feedback">:message</div>') !!}
-            </div>
-            <div class="col-md-8 mb-3">
                 {{ Form::label('Informacion Material') }}
-                {{ Form::text('informacioninventario', $material->informacioninventario, ['class' => 'form-control' . ($errors->has('nomDireccion') ? ' is-invalid' : ''), 'placeholder' => 'Estado Equipo']) }}
+                {{ Form::text('informacioninventario', $material->informacioninventario ?? '', ['class' => 'form-control' . ($errors->has('nomDireccion') ? ' is-invalid' : ''),'id' => 'informacion-material', 'placeholder' => 'Estado Equipo']) }}
                 {!! $errors->first('nomDireccion', '<div class="invalid-feedback">:message</div>') !!}
             </div>
             <div class="col-md-8 mb-3">
                 {{ Form::label('Cantidad Material') }}
-                {{ Form::number('cantidadmaterial', $material->cantidadmaterial, ['class' => 'form-control' . ($errors->has('nomDireccion') ? ' is-invalid' : ''), 'placeholder' => 'Estado Equipo']) }}
+                {{ Form::number('cantidadmaterial', $material->cantidadmaterial ?? '', ['class' => 'form-control' . ($errors->has('nomDireccion') ? ' is-invalid' : ''), 'id' => 'cantidad-material', 'placeholder' => 'Estado Equipo']) }}
                 {!! $errors->first('nomDireccion', '<div class="invalid-feedback">:message</div>') !!}
             </div>
             

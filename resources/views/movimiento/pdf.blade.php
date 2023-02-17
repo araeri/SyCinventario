@@ -1,12 +1,7 @@
 <!doctype html>
 <html lang="en">
 
-<head>
-<a class="navbar-brand ps-3" href="{{ url('/') }}">
-            <img src="https://cdn.discordapp.com/attachments/1069978226975309986/1070401530332729434/AIorK4w0dbRTTqbtRkmfUxqrdJxi9KlngoafI1mlnRH3AY0wClHj3CTwQWQyopGqEW9Hu3jFIGCMgOM.png" alt="" height="70">    
-        <!-- {{ config('app.name', 'Laravel') }} -->
-        </a>
-</head>
+
 
 <body>
 <table class="table table-responsive table-bordered" id="datatablesSimple">

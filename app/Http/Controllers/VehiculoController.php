@@ -29,7 +29,8 @@ class VehiculoController extends Controller
     public function create()
     {
         $vehiculo = new Vehiculo();
-        return view('vehiculo.create', compact('vehiculo'));
+        $numero = Inventario::max('idinventario') + 1;
+        return view('vehiculo.create', compact('vehiculo'), compact('numero'));
     }
 
     /**
@@ -51,7 +52,7 @@ class VehiculoController extends Controller
         $id = Inventario::insertGetId([
             'codinventario' => $request->codinventario, 'nombreinventario' => $request->nombreinventario, 
             'tipoinventario'=> $request->tipoinventario, 'fotoinventario' => $filename,
-            'estadoinventario' => $request->estadoinventario, 'informacioninventario' => $request->informacioninventario]
+            'estadoinventario' => 'En Buenas Condiciones', 'informacioninventario' => $request->informacioninventario]
             
         );    
         //dd($id);    
@@ -74,9 +75,9 @@ class VehiculoController extends Controller
         $vehiculoEleg = Inventario::join('vehiculos', 'idinventario', '=', 'vehiculos.idinventariofk')->where('idinventario', '=', $vehiculo->idinventario)->first();
         //$herramienta = $herramientum;
         $vehiculo = $vehiculoEleg;
-        $numero = Inventario::max('idinventario') +1;
+        
         //dd($material);
-        return view('vehiculo.show', compact('vehiculo'), compact('numero'));
+        return view('vehiculo.show', compact('vehiculo'));
     }
 
     /**
