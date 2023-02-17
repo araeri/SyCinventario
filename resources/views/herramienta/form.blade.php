@@ -9,7 +9,7 @@
             </div>
             <div class="col-md-4 mb-3">
                 {{ Form::label('Nombre Herramienta') }}
-                {{ Form::text('nombreinventario', $herramienta->nombreinventario, ['class' => 'form-control' . ($errors->has('nombreinventario') ? ' is-invalid' : ''), 'placeholder' => 'Nombre Herramienta']) }}
+                {{ Form::text('nombreinventario', $herramienta->nombreinventario ?? '', ['class' => 'form-control' . ($errors->has('nombreinventario') ? ' is-invalid' : ''), 'id' => 'nombre-herramienta', 'placeholder' => 'Nombre Herramienta']) }}
                 {!! $errors->first('nombre', '<div class="invalid-feedback">:message</div>') !!}
             </div>
             <div class="col-md-4 mb-3">
@@ -25,13 +25,8 @@
                 {!! $errors->first('nomDireccion', '<div class="invalid-feedback">:message</div>') !!}
             </div>
             <div class="col-md-8 mb-3">
-                {{ Form::label('Estado Herramienta') }}
-                {{ Form::text('estadoinventario', $herramienta->estadoinventario, ['class' => 'form-control' . ($errors->has('estadoinventario') ? ' is-invalid' : ''), 'placeholder' => 'Estado Herramienta']) }}
-                {!! $errors->first('estadoinventario', '<div class="invalid-feedback">:message</div>') !!}
-            </div>
-            <div class="col-md-8 mb-3">
                 {{ Form::label('Informacion Herramienta') }}
-                {{ Form::text('informacioninventario', $herramienta->informacioninventario, ['class' => 'form-control' . ($errors->has('informacioninventario') ? ' is-invalid' : ''), 'placeholder' => 'Información Herramienta']) }}
+                {{ Form::text('informacioninventario', $herramienta->informacioninventario ?? '', ['class' => 'form-control' . ($errors->has('informacioninventario') ? ' is-invalid' : ''), 'id' => 'informacion-herramienta', 'placeholder' => 'Información Herramienta']) }}
                 {!! $errors->first('informacioninventario', '<div class="invalid-feedback">:message</div>') !!}
             </div>
             

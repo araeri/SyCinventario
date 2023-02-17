@@ -52,7 +52,7 @@ class VehiculoController extends Controller
         $id = Inventario::insertGetId([
             'codinventario' => $request->codinventario, 'nombreinventario' => $request->nombreinventario, 
             'tipoinventario'=> $request->tipoinventario, 'fotoinventario' => $filename,
-            'estadoinventario' => $request->estadoinventario, 'informacioninventario' => $request->informacioninventario]
+            'estadoinventario' => 'En Buenas Condiciones', 'informacioninventario' => $request->informacioninventario]
             
         );    
         //dd($id);    

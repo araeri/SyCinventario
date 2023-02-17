@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\Equipo;
@@ -53,7 +52,7 @@ class EquipoController extends Controller
         Inventario::insert([
             'codinventario' => $request->codinventario, 'nombreinventario' => $request->nombreinventario, 
             'tipoinventario'=> $request->tipoinventario, 'fotoinventario' => $filename,
-            'estadoinventario' => $request->estadoinventario, 'informacioninventario' => $request->informacioninventario
+            'estadoinventario' => 'En Buenas Condiciones', 'informacioninventario' => $request->informacioninventario
         
         ]);
         return redirect()->route('equipo.index');
