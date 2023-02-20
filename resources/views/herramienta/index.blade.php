@@ -35,7 +35,7 @@
                             <td>{{ $herramienta->codinventario }}</td>
                             <td>{{ $herramienta->nombreinventario }}</td>
                             <td>
-                                <img src="{{asset('/Imagenes/'.$herramienta->fotoinventario)}}" class="img" alt="No imagen" style="width: 100px; height: 100px;">
+                                <img src="{{asset('/Imagenes/'.$herramienta->fotoinventario) ?? asset('/Imagenes/sinimagen.jpg')}}" class="img" alt="No imagen" style="width: 100px; height: 100px;">
                             </td>
                             <td>{{ $herramienta->estadoinventario}}</td>
                             <td>{{ $herramienta->informacioninventario}}</td>

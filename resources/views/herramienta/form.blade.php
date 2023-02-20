@@ -25,6 +25,11 @@
                 {!! $errors->first('nomDireccion', '<div class="invalid-feedback">:message</div>') !!}
             </div>
             <div class="col-md-8 mb-3">
+                {{ Form::label('Estado Herramienta') }}
+                {{ Form::select('estadoinventario',['En Buenas Condiciones' => 'Disponible', 'En Uso'=> 'No Disponible', 'En Mantencion' => 'Mantencion', 'En Malas Condiciones' => 'Mal Estado'], ['class' => 'form-control' . ($errors->has('estadoinventario') ? ' is-invalid' : ''), 'placeholder' => 'Estado Herramienta']) }}
+                {!! $errors->first('estadoinventario', '<div class="invalid-feedback">:message</div>') !!}
+            </div>
+            <div class="col-md-8 mb-3">
                 {{ Form::label('Informacion Herramienta') }}
                 {{ Form::text('informacioninventario', $herramienta->informacioninventario ?? '', ['class' => 'form-control' . ($errors->has('informacioninventario') ? ' is-invalid' : ''), 'id' => 'informacion-herramienta', 'placeholder' => 'Información Herramienta']) }}
                 {!! $errors->first('informacioninventario', '<div class="invalid-feedback">:message</div>') !!}

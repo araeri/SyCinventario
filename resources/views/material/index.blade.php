@@ -36,7 +36,7 @@
                             <td>{{ $material->codinventario }}</td>
                             <td>{{ $material->nombreinventario }}</td>
                             <td>
-                                <img src="{{asset('/Imagenes/'.$material->fotoinventario)}}" class="img" alt="No imagen" style="width: 100px; height: 100px;">
+                                <img src="{{asset('/Imagenes/'.$material->fotoinventario) ?? asset('/Imagenes/sinimagen.jpg')}}" class="img" alt="No imagen" style="width: 100px; height: 100px;">
                             </td>
                             <td>{{ $material->estadoinventario}}</td>
                             <td>{{ $material->cantidadmaterial}}</td>

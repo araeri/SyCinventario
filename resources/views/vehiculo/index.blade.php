@@ -39,7 +39,7 @@
                             <td>{{ $vehiculo->patentevehiculo}}</td>
                             <td>{{ $vehiculo->tipovehiculo}}</td>
                             <td>
-                                <img src="{{asset('/Imagenes/'.$vehiculo->fotoinventario)}}" class="img" alt="No imagen" style="width: 100px; height: 100px;">
+                                <img src="{{asset('/Imagenes/'.$vehiculo->fotoinventario) ?? asset('/Imagenes/sinimagen.jpg')}}" class="img" alt="No imagen" style="width: 100px; height: 100px;">
                             </td>
                             <td>{{ $vehiculo->estadoinventario}}</td>
                             <td>{{ $vehiculo->informacioninventario}}</td>
