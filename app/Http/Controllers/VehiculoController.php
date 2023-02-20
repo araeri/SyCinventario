@@ -10,19 +10,18 @@ use Illuminate\Support\Facades\File;
 class VehiculoController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Muestra un el listado de vehículos.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
         $vehiculos = Inventario::join('vehiculos', 'idinventario', '=', 'vehiculos.idinventariofk')->get();
-        //dd($vehiculos);
         return view('vehiculo.index',compact('vehiculos'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Muestra la forma para crear un nuevo vehículo.
      *
      * @return \Illuminate\Http\Response
      */
@@ -34,38 +33,33 @@ class VehiculoController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Guarda un nuevo vehículo en la base de datos.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        if ($request->hasfile('fotoinventario')) {
+        //Insercción de la nueva imagen
+        $file = $request->file('fotoinventario');
+        $extention = $file->getClientOriginalExtension();
+        $filename = time().'.'.$extention;
+        $file->move(public_path().'/Imagenes', $filename);
 
-            $file = $request->file('fotoinventario');
-            $extention = $file->getClientOriginalExtension();
-            $filename = '/'.time().'.'.$extention;
-            $file->move(public_path().'/Imagenes', $filename);
-            //dd($filename);
-        }
         $id = Inventario::insertGetId([
             'codinventario' => $request->codinventario, 'nombreinventario' => $request->nombreinventario, 
             'tipoinventario'=> $request->tipoinventario, 'fotoinventario' => $filename,
-            'estadoinventario' => 'En Buenas Condiciones', 'informacioninventario' => $request->informacioninventario]
-            
-        );    
-        //dd($id);    
+            'estadoinventario' => $request->estadoinventario, 'informacioninventario' => $request->informacioninventario
+        ]);     
         Vehiculo::insert([
             'idinventariofk' => $id, 'patentevehiculo' => $request->patentevehiculo,
             'tipovehiculo' => $request->tipovehiculo
         ]);
         return redirect()->route('vehiculo.index');
-        
     }
 
     /**
-     * Display the specified resource.
+     * Muestra un vehículo en específico.
      *
      * @param  \App\Models\Vehiculo  $vehiculo
      * @return \Illuminate\Http\Response
@@ -73,14 +67,12 @@ class VehiculoController extends Controller
     public function show(Inventario $vehiculo)
     {
         $vehiculoEleg = Inventario::join('vehiculos', 'idinventario', '=', 'vehiculos.idinventariofk')->where('idinventario', '=', $vehiculo->idinventario)->first();
-        //$herramienta = $herramientum;
         $vehiculo = $vehiculoEleg;
-        //dd($material);
         return view('vehiculo.show', compact('vehiculo'));
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Muestra la forma para editar un vehículo existente.
      *
      * @param  \App\Models\Vehiculo  $vehiculo
      * @return \Illuminate\Http\Response
@@ -88,15 +80,13 @@ class VehiculoController extends Controller
     public function edit(Inventario $vehiculo)
     {
         $vehiculoEleg = Inventario::join('vehiculos', 'idinventario', '=', 'vehiculos.idinventariofk')->where('idinventario', '=', $vehiculo->idinventario)->first();
-        //$herramienta = $herramientum;
         $vehiculo = $vehiculoEleg;
         $numero = null;
-        //dd($vehiculo);
         return view('vehiculo.edit', compact('vehiculo'), compact('numero') );
     }
 
     /**
-     * Update the specified resource in storage.
+     * Actualiza el vehículo en la base de datos.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Vehiculo  $vehiculo
@@ -105,33 +95,52 @@ class VehiculoController extends Controller
     public function update(Request $request, $id)
     {
         $Vehiculo = Inventario::find($id);
+        
+        //Comprueba si hay una imagen nueva
         if ($request->hasfile('fotoinventario')) {
-            $destination = storage_path('Imagenes\\'.$Vehiculo->fotoinventario);
+            $destination = public_path('Imagenes/'.$Vehiculo->fotoinventario);
             if (File::exists($destination)) {
+                //Si existe ruta, lo borra
                 File::delete($destination);
             }
 
+            //Insercción de nueva imaben
             $file = $request->file('fotoinventario');
             $extention = $file->getClientOriginalExtension();
-            $filename = '/'.time().'.'.$extention;
+            $filename = time().'.'.$extention;
             $file->move(public_path().'/Imagenes', $filename);
-        }
-        Inventario::where('idinventario', $id)
-        ->update([
-            'codinventario' => $request->codinventario, 'nombreinventario' => $request->nombreinventario,  
-            'fotoinventario' => $filename, 'estadoinventario' => $request->estadoinventario, 
-            'informacioninventario' => $request->informacioninventario
-        ]);
-        Vehiculo::where('idinventariofk', $id)
-        ->update([
-            'tipovehiculo' => $request->tipovehiculo, 'patentevehiculo' => $request->patentevehiculo
+        
+            Inventario::where('idinventario', $id)
+            ->update([
+                'codinventario' => $request->codinventario, 'nombreinventario' => $request->nombreinventario,  
+                'fotoinventario' => $filename, 'estadoinventario' => $request->estadoinventario, 
+                'informacioninventario' => $request->informacioninventario
+            ]);
+            Vehiculo::where('idinventariofk', $id)
+            ->update([
+                'tipovehiculo' => $request->tipovehiculo, 'patentevehiculo' => $request->patentevehiculo
 
-        ]);
+            ]);
+        }
+        //Si no, actualiza el resto de los datos
+        else{
+            Inventario::where('idinventario', $id)
+            ->update([
+                'codinventario' => $request->codinventario, 'nombreinventario' => $request->nombreinventario,  
+                'estadoinventario' => $request->estadoinventario, 
+                'informacioninventario' => $request->informacioninventario
+            ]);
+            Vehiculo::where('idinventariofk', $id)
+            ->update([
+                'tipovehiculo' => $request->tipovehiculo, 'patentevehiculo' => $request->patentevehiculo
+
+            ]);
+        }
         return redirect()->route('vehiculo.index');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Borra un vehículo de la lista.
      *
      * @param  \App\Models\Vehiculo  $vehiculo
      * @return \Illuminate\Http\Response
@@ -139,11 +148,10 @@ class VehiculoController extends Controller
     public function destroy(Inventario $vehiculo)
     {
         $Vehiculo = Inventario::find($vehiculo->idinventario);
-        $destination = storage_path('Imagenes\\'.$Vehiculo->fotoinventario);
+        $destination = storage_path('Imagenes/'.$Vehiculo->fotoinventario);
             if (File::exists($destination)) {
                 File::delete($destination);
             }
-        //dd($vehiculo);
         $vehiculo->delete();
         return redirect()->route('vehiculo.index');
     }

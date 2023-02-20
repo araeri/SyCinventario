@@ -10,19 +10,18 @@ use Illuminate\Support\Facades\File;
 class MaterialController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Muestra la lista de materiales.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
         $materiales = Inventario::join('materials', 'idinventario', '=', 'materials.idinventariofk')->get();
-        //dd($materiales);
         return view('material.index',compact('materiales'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Muestra la forma para un nuevo material.
      *
      * @return \Illuminate\Http\Response
      */
@@ -34,27 +33,27 @@ class MaterialController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Guarda el material en la base de datos.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
+        //Establece la existencialidad del material verificando el numero ingresado
         if ($request->cantidadmaterial > 0) {
             $estadoInv = 'Con Existencias';
         }
         else {
             $estadoInv = 'Sin Existencias';
         }
-        if ($request->hasfile('fotoinventario')) {
 
-            $file = $request->file('fotoinventario');
-            $extention = $file->getClientOriginalExtension();
-            $filename = '/'.time().'.'.$extention;
-            $file->move(public_path().'/Imagenes', $filename);
-            //dd($filename);
-        }
+        //Inserccion de la imagen
+        $file = $request->file('fotoinventario');
+        $extention = $file->getClientOriginalExtension();
+        $filename = time().'.'.$extention;
+        $file->move(public_path().'/Imagenes', $filename);
+
         $id = Inventario::insertGetId([
             'codinventario' => $request->codinventario, 'nombreinventario' => $request->nombreinventario, 
             'tipoinventario'=> $request->tipoinventario, 'fotoinventario' => $filename,
@@ -65,11 +64,10 @@ class MaterialController extends Controller
             'idinventariofk' => $id, 'cantidadmaterial' => $request->cantidadmaterial
         ]);
         return redirect()->route('material.index');
-        
     }
 
     /**
-     * Display the specified resource.
+     * Muestra del material más en detalle.
      *
      * @param  \App\Models\Material  $material
      * @return \Illuminate\Http\Response
@@ -77,14 +75,12 @@ class MaterialController extends Controller
     public function show(Inventario $material)
     {
         $materialEleg = Inventario::join('materials', 'idinventario', '=', 'materials.idinventariofk')->where('idinventario', '=', $material->idinventario)->first();
-        //$herramienta = $herramientum;
         $material = $materialEleg;
-        //dd($material);
         return view('material.show', compact('material'));
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Muestra la forma de edición de un material.
      *
      * @param  \App\Models\Material  $material
      * @return \Illuminate\Http\Response
@@ -92,15 +88,13 @@ class MaterialController extends Controller
     public function edit(Inventario $material)
     {
         $materialEleg = Inventario::join('materials', 'idinventario', '=', 'materials.idinventariofk')->where('idinventario', '=', $material->idinventario)->first();
-        //$herramienta = $herramientum;
         $material = $materialEleg;
         $numero = null;
-        //dd($material);
         return view('material.edit', compact('material'), compact('numero') );
     }
 
     /**
-     * Update the specified resource in storage.
+     * Actualiza el material en la base de datos.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Material  $material
@@ -108,6 +102,7 @@ class MaterialController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //Establece la existencialidad del material verificando el numero ingresado
         if ($request->cantidadmaterial > 0) {
             $estadoInv = 'Con Existencias';
         }
@@ -115,33 +110,50 @@ class MaterialController extends Controller
             $estadoInv = 'Sin Existencias';
         }
         $Material = Inventario::find($id);
+        
+        //Verifica si hay un ingreso de imagen nueva
         if ($request->hasfile('fotoinventario')) {
-            $destination = storage_path('Imagenes\\'.$Material->fotoinventario);
+            $destination = public_path('Imagenes/'.$Material->fotoinventario);
             if (File::exists($destination)) {
+                //Si existe la ruta, lo borra
                 File::delete($destination);
             }
 
+            //Insercción de la nueva imagen
             $file = $request->file('fotoinventario');
             $extention = $file->getClientOriginalExtension();
-            $filename = '/'.time().'.'.$extention;
+            $filename = time().'.'.$extention;
             $file->move(public_path().'/Imagenes', $filename);
+        
+            Inventario::where('idinventario', $id)
+            ->update([
+                'codinventario' => $request->codinventario, 'nombreinventario' => $request->nombreinventario,  
+                'fotoinventario' => $filename, 'estadoinventario' => $estadoInv, 
+                'informacioninventario' => $request->informacioninventario
+            ]);
+            Material::where('idinventariofk', $id)
+            ->update([
+                'cantidadmaterial' => $request->cantidadmaterial
+            ]);
         }
-        Inventario::where('idinventario', $id)
-        ->update([
-            'codinventario' => $request->codinventario, 'nombreinventario' => $request->nombreinventario,  
-            'fotoinventario' => $filename, 'estadoinventario' => $estadoInv, 
-            'informacioninventario' => $request->informacioninventario
-        ]);
-        Material::where('idinventariofk', $id)
-        ->update([
-            'cantidadmaterial' => $request->cantidadmaterial
-
-        ]);
+        //Si no, se actualiza el resto de información entregada excepto la nueva imagen
+        else{
+            Inventario::where('idinventario', $id)
+            ->update([
+                'codinventario' => $request->codinventario, 'nombreinventario' => $request->nombreinventario,  
+                'estadoinventario' => $estadoInv, 
+                'informacioninventario' => $request->informacioninventario
+            ]);
+            Material::where('idinventariofk', $id)
+            ->update([
+                'cantidadmaterial' => $request->cantidadmaterial
+            ]);
+        }
         return redirect()->route('material.index');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Borra el Material de la base de datos.
      *
      * @param  \App\Models\Material  $material
      * @return \Illuminate\Http\Response
@@ -149,11 +161,10 @@ class MaterialController extends Controller
     public function destroy(Inventario $material)
     {
         $Material = Inventario::find($material->idinventario);
-        $destination = storage_path('Imagenes\\'.$Material->fotoinventario);
+        $destination = storage_path('Imagenes/'.$Material->fotoinventario);
             if (File::exists($destination)) {
                 File::delete($destination);
             }
-        //dd($material);
         $material->delete();
         return redirect()->route('material.index');
     }

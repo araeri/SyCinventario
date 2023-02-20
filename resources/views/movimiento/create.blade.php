@@ -43,32 +43,14 @@
         selectedItemHtml += '<button class="delete-item" data-item-id="' + inventario.idinventario + '">Delete Item</button>';
         selectedItemHtml += '</div>';
       });
-  
-      $(document).on('click', '.delete-item', function() {
-        var itemId = $(this).data('item-id');
-        selectedItems = selectedItems.filter(item => item.idinventario != itemId);
-        updateSelectedItemInfo();
-      });
-  
-      function updateSelectedItemInfo() {
-        var selectedItemHtml = '';
-  
-        selectedItems.forEach(function(inventario) {
-          selectedItemHtml += '<div id="item-info-' + inventario.idinventario + '">';
-          selectedItemHtml += '<p>Item Name: ' + inventario.nombreinventario + '</p>';
-          selectedItemHtml += '<p>Item Description: ' + inventario.tipoinventario + '</p>';
-          selectedItemHtml += '<p>Item Detalle: ' + inventario.informacioninventario + '</p>';
-          selectedItemHtml += '<button class="delete-item" data-item-id="' + inventario.idinventario + '">Delete Item</button>';
-          selectedItemHtml += '</div>';
-        });
-  
-        $('.item-info').html(selectedItemHtml);
-        if (selectedItems.length > 0) {
-          $('.item-info').show();
-        } else {
-          $('.item-info').hide();
-        }
+
+      $('.item-info').html(selectedItemHtml);
+      if (selectedItems.length > 0) {
+        $('.item-info').show();
+      } else {
+        $('.item-info').hide();
       }
+
       if (totalCantidadMaterial > maxCantidadMaterial) {
         alert('You have selected more materials than are available!');
         $('#add-item').prop('disabled', true);

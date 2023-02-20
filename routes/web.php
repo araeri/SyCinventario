@@ -5,7 +5,6 @@ use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\HerramientaController;
 use App\Http\Controllers\VehiculoController;
 use App\Http\Controllers\MaterialController;
-use App\Http\Controllers\ResponsableController;
 use App\Http\Controllers\MovimientoController;
 use App\Http\Controllers\MovimientoListaController;
 use Illuminate\Support\Facades\Route;
@@ -33,7 +32,6 @@ Route::get('/users/{user}/edit', [App\Http\Controllers\UserController::class, 'e
 Route::put('/users/{user}', [App\Http\Controllers\UserController::class, 'update'])->name('users.update');
 Route::delete('/users/{user}', [App\Http\Controllers\UserController::class, 'destroy'])->name('users.delete');
 
-Route::get('/movimiento/pdf', [MovimientoController::class, 'pdf'])->name('movimiento.pdf');
 Route::post('/movimiento/filtro', [MovimientoController::class, 'search'])->name('movimiento.search');
 
 
@@ -42,7 +40,6 @@ Route::resource('/equipo', EquipoController::class);
 Route::resource('herramienta', HerramientaController::class);
 Route::resource('/vehiculo', VehiculoController::class);
 Route::resource('/material', MaterialController::class);
-Route::resource('/responsable', ResponsableController::class);
 Route::resource('/movimiento', MovimientoController::class);
 Route::get('/movimiento/entrada/{movimiento}', [MovimientoController::class , 'entrada'])->name('movimiento.entrada');
 Route::post('/movimiento/entrada', [MovimientoController::class , 'entradainventario'])->name('movimiento.entradainventario');

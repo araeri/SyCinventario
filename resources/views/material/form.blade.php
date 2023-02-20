@@ -25,6 +25,11 @@
                 {!! $errors->first('nomDireccion', '<div class="invalid-feedback">:message</div>') !!}
             </div>
             <div class="col-md-8 mb-3">
+                {{ Form::label('Estado Material') }}
+                {{ Form::select('estadoinventario',['Con Existencias' => 'Con Existencias', 'Sin Existencias'=> 'Sin Existencias'], ['class' => 'form-control' . ($errors->has('estadoinventario') ? ' is-invalid' : ''), 'placeholder' => 'Estado Material']) }}
+                {!! $errors->first('estadoinventario', '<div class="invalid-feedback">:message</div>') !!}
+            </div>
+            <div class="col-md-8 mb-3">
                 {{ Form::label('Informacion Material') }}
                 {{ Form::text('informacioninventario', $material->informacioninventario ?? '', ['class' => 'form-control' . ($errors->has('nomDireccion') ? ' is-invalid' : ''),'id' => 'informacion-material', 'placeholder' => 'Estado Equipo']) }}
                 {!! $errors->first('nomDireccion', '<div class="invalid-feedback">:message</div>') !!}

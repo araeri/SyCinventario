@@ -39,7 +39,7 @@ class MovimientoListaController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Muestra la lista de movimientos de un movimiento en particular.
      *
      * @param  \App\Models\MovimientoLista  $movimientoLista
      * @return \Illuminate\Http\Response

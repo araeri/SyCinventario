@@ -30,8 +30,13 @@
                 {!! $errors->first('nomDireccion', '<div class="invalid-feedback">:message</div>') !!}
             </div>
             <div class="col-md-8 mb-3">
+                {{ Form::label('Estado Vehículo') }}
+                {{ Form::select('estadoinventario',['En Buenas Condiciones' => 'Disponible', 'En Uso'=> 'No Disponible', 'En Mantencion' => 'Mantencion', 'En Malas Condiciones' => 'Mal Estado'], ['class' => 'form-control' . ($errors->has('estadoinventario') ? ' is-invalid' : ''), 'placeholder' => 'Estado Vehículo']) }}
+                {!! $errors->first('estadoinventario', '<div class="invalid-feedback">:message</div>') !!}
+            </div>
+            <div class="col-md-8 mb-3">
                 {{ Form::label('Tipo Vehiculo') }}
-                {{ Form::text('tipovehiculo', $vehiculo->tipovehiculo ?? '', ['class' => 'form-control' . ($errors->has('nomDireccion') ? ' is-invalid' : ''), 'id'=> 'tipo-vehiculo', 'placeholder' => 'Estado Equipo']) }}
+                {{ Form::select('tipovehiculo', ['Ligero' => 'Ligero', 'Pesado'=> 'Pesadp'], ['class' => 'form-control' . ($errors->has('nomDireccion') ? ' is-invalid' : ''), 'id'=> 'tipo-vehiculo', 'placeholder' => 'Estado Equipo']) }}
                 {!! $errors->first('nomDireccion', '<div class="invalid-feedback">:message</div>') !!}
             </div>
             <div class="col-md-8 mb-3">

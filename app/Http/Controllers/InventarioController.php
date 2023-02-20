@@ -8,14 +8,13 @@ use Illuminate\Http\Request;
 class InventarioController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Muestra la lista de inventario.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
         $inventarios = Inventario::get();
-        //$datos['registros']=Registro::paginate(5);
         return view('inventario.index',compact('inventarios'));
     }
 

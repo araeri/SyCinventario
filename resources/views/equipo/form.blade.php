@@ -13,10 +13,7 @@
                 {!! $errors->first('nombreinventario', '<div class="invalid-feedback">:message</div>') !!}
             </div>
             <div class="col-md-4 mb-3">
-                {{ Form::label('Foto Inventario') }}
-                {{ Form::file('fotoinventario')}}
-                {!! $errors->first('fotoinventario', '<div class="invalid-feedback">:message</div>') !!}
-
+                <input type="file" value="{{ asset('Imagenes' . $equipo->fotoinventario) }}" name ="fotoinventario" class="form-control" id = 'foto-inventario'>
             </div>
         </div>
         <div class="row">
@@ -24,6 +21,11 @@
                 {{ Form::label('Tipo Inventario') }}
                 {{ Form::text('tipoinventario', 'Equipo', ['class' => 'form-control' . ($errors->has('tipoinventario') ? ' is-invalid' : ''), 'placeholder' => 'Tipo Inventario', 'readonly' => 'true']) }}
                 {!! $errors->first('tipoinventario', '<div class="invalid-feedback">:message</div>') !!}
+            </div>
+            <div class="col-md-8 mb-3">
+                {{ Form::label('Estado Equipo') }}
+                {{ Form::select('estadoinventario',['En Buenas Condiciones' => 'Disponible', 'En Uso'=> 'No Disponible', 'En Mantencion' => 'Mantencion', 'En Malas Condiciones' => 'Mal Estado'], ['class' => 'form-control' . ($errors->has('estadoinventario') ? ' is-invalid' : ''), 'placeholder' => 'Estado Herramienta']) }}
+                {!! $errors->first('estadoinventario', '<div class="invalid-feedback">:message</div>') !!}
             </div>
             <div class="col-md-8 mb-3">
                 {{ Form::label('Informacion Inventario') }}
