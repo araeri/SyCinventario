@@ -44,11 +44,13 @@
 
                             <td>
                                 <form action="{{ route('material.destroy',$material->idinventario) }}" method="POST">
-                                    <a class="btn btn-sm btn-primary " href="{{ route('material.show',$material->idinventario) }}"><i class="fa fa-fw fa-eye"></i> Mostrar</a>
-                                    <a class="btn btn-sm btn-success" href="{{ route('material.edit', $material->idinventario)}}"><i class="fa fa-fw fa-edit"></i> Editar</a>
-                                    {{ csrf_field() }}
-                                    {{ method_field('DELETE') }}
-                                    <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modal"><i class="fa fa-fw fa-trash"></i> Borrar</button>
+                                    <div class="btn-group-vertical">
+                                        <a class="btn btn-sm btn-primary " href="{{ route('material.show',$material->idinventario) }}"><i class="fa fa-fw fa-eye"></i> Mostrar</a>
+                                        <a class="btn btn-sm btn-success" href="{{ route('material.edit', $material->idinventario)}}"><i class="fa fa-fw fa-edit"></i> Editar</a>
+                                        {{ csrf_field() }}
+                                        {{ method_field('DELETE') }}
+                                        <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modal"><i class="fa fa-fw fa-trash"></i> Borrar</button>
+                                    </div>
                                 </form>
                             </td>
                         </tr>

@@ -40,7 +40,7 @@
           selectedItemHtml += '<input type="number" name="item-cantidad-' + inventario.idinventario + '" id="item-cantidad-' + inventario.idinventario + '" value="1">';
           totalCantidadMaterial += 1;
         }
-        selectedItemHtml += '<button class="delete-item" data-item-id="' + inventario.idinventario + '">Delete Item</button>';
+        selectedItemHtml += '<button class="btn btn-danger delete-item" data-item-id="' + inventario.idinventario + '">Delete Item</button>';
         selectedItemHtml += '</div>';
       });
 
@@ -108,16 +108,29 @@
 });
 </script>
 
+@extends('layouts.app')
 
-<div class="card-body">
-    <form method="POST" class="row g-3" action="{{ route('movimiento.store') }}"  role="form" enctype="multipart/form-data" id='form'>
-        @csrf
+@section('content')
+<div class="card">
+    <div class="card-header">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span id="card_title">Movimientos</span>
+            <div class="float-right">
+                <a href="{{ route('movimiento.index') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                    {{ __('Volver') }}
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <form method="POST" class="row g-3" action="{{ route('movimiento.store') }}"  role="form" enctype="multipart/form-data" id='form'>
+            @csrf
 
-        @include('movimiento.form')
+            @include('movimiento.form')
 
-    </form>
-    <button id="add-item">Add Item</button>
-    <div class="item-info"></div>
-
-    
+        </form>
+        <button id="add-item" class="btn btn-success">Add Item</button>
+        <div class="item-info"></div>   
+    </div>
 </div>
+@endsection
