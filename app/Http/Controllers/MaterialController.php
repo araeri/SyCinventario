@@ -14,6 +14,11 @@ class MaterialController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $materiales = Inventario::join('materials', 'idinventario', '=', 'materials.idinventariofk')->get();
