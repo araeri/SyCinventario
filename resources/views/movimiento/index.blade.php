@@ -40,8 +40,8 @@
             </div>
         </form>
         <div class="table-responsive mt-3">
-            <table class="table align-middle bg-white table-hover table-borderless">
-                <thead class="bg-light text-secondary">
+            <table id="datatablesSimple">
+                <thead>
                     <tr>
                         <th>Entrega Movimiento</th>
                         <th>Recepcion Movimiento</th>

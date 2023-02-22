@@ -15,15 +15,15 @@
     </div>
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table align-middle bg-white table-hover table-borderless">
-                <thead class="bg-light text-secondary">
+            <table id="datatablesSimple">
+                <thead>
                     <tr>
                         <th>Id</th>
                         <th>Codherramienta</th>
                         <th>Nombre Herramienta</th>
                         <th>Foto</th>
                         <th>Estado Herramienta</th>
-                        <th>Infomacion Herramienta</th>
+                        <th>Infomación Herramienta</th>
 
                         <th>Acción</th>
                     </tr>

@@ -15,8 +15,8 @@
     </div>
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table align-middle bg-white table-hover table-borderless">
-                <thead class="bg-light text-secondary">
+            <table id="datatablesSimple">
+                <thead>
                     <tr>
                         <th>Id</th>
                         <th>Codmaterial</th>
