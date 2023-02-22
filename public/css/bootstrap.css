@@ -304,6 +304,50 @@ svg {
 table {
   caption-side: bottom;
   border-collapse: collapse;
+  vertical-align: middle !important;
+}
+
+table, .dataTable-table {
+  --bs-table-bg: transparent;
+  --bs-table-accent-bg: transparent;
+  --bs-table-striped-color: #212529;
+  --bs-table-striped-bg: rgba(0, 0, 0, 0.05);
+  --bs-table-active-color: #212529;
+  --bs-table-active-bg: rgba(0, 0, 0, 0.1);
+  --bs-table-hover-color: #212529;
+  --bs-table-hover-bg: rgba(0, 0, 0, 0.075);
+  width: 100%;
+  margin-bottom: 1rem;
+  color: #212529;
+  vertical-align: top;
+  border-color: #dee2e6;
+}
+table > :not(caption) > * > *, .dataTable-table > :not(caption) > * > * {
+  padding: 0.5rem 0.5rem;
+  background-color: var(--bs-table-bg);
+  border-bottom-width: 1px;
+  box-shadow: inset 0 0 0 9999px var(--bs-table-accent-bg);
+}
+table > tbody, .dataTable-table > tbody {
+  vertical-align: inherit;
+}
+table > thead, .dataTable-table > thead {
+  vertical-align: bottom;
+}
+/* .table > :not(:first-child), .dataTable-table > :not(:first-child) {
+  border-top: 2px solid currentColor;
+} */
+
+table > :not(caption) > * > * {
+  border-bottom-width: 0;
+}
+table > :not(:first-child) {
+  border-top-width: 0;
+}
+
+table > tbody > tr:hover > *, .dataTable-table > tbody > tr:hover > * {
+  --bs-table-accent-bg: var(--bs-table-hover-bg);
+  color: var(--bs-table-hover-color);
 }
 
 caption {
@@ -327,6 +371,13 @@ th {
   border-color: inherit;
   border-style: solid;
   border-width: 0;
+}
+
+thead{
+  --bs-bg-opacity: 1;
+  background-color: rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) !important;
+  --bs-text-opacity: 1;
+  color: rgba(var(--bs-secondary-rgb), var(--bs-text-opacity)) !important;
 }
 
 label {
@@ -4821,7 +4872,7 @@ textarea.form-control-lg {
 .page-link, .dataTable-pagination a {
   position: relative;
   display: block;
-  color: #0d6efd;
+  color: #6c757d;
   text-decoration: none;
   background-color: #fff;
   border: 1px solid #dee2e6;
@@ -4834,16 +4885,16 @@ textarea.form-control-lg {
 }
 .page-link:hover, .dataTable-pagination a:hover {
   z-index: 2;
-  color: #0a58ca;
+  color: #5c636a;
   background-color: #e9ecef;
   border-color: #dee2e6;
 }
 .page-link:focus, .dataTable-pagination a:focus {
   z-index: 3;
-  color: #0a58ca;
+  color: #5c636a;
   background-color: #e9ecef;
   outline: 0;
-  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+  /* box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25); */
 }
 
 .page-item:not(:first-child) .page-link, .page-item:not(:first-child) .dataTable-pagination a, .dataTable-pagination .page-item:not(:first-child) a, .dataTable-pagination li:not(:first-child) .page-link, .dataTable-pagination li:not(:first-child) a {
@@ -4852,8 +4903,8 @@ textarea.form-control-lg {
 .page-item.active .page-link, .page-item.active .dataTable-pagination a, .dataTable-pagination .page-item.active a, .dataTable-pagination li.active .page-link, .dataTable-pagination li.active a {
   z-index: 3;
   color: #fff;
-  background-color: #0d6efd;
-  border-color: #0d6efd;
+  background-color: #6c757d;
+  border-color: #6c757d;
 }
 .page-item.disabled .page-link, .page-item.disabled .dataTable-pagination a, .dataTable-pagination .page-item.disabled a, .dataTable-pagination li.disabled .page-link, .dataTable-pagination li.disabled a {
   color: #6c757d;
@@ -11600,7 +11651,7 @@ body {
 .dataTable-pagination .active a,
 .dataTable-pagination .active a:focus,
 .dataTable-pagination .active a:hover {
-  background-color: #0d6efd;
+  background-color: #5c636a;
 }
 
 .dataTable-pagination .ellipsis a,
@@ -11663,6 +11714,9 @@ body {
   position: relative;
   width: 100%;
   padding-right: 1rem;
+  --bs-text-opacity: 1;
+  color: rgba(var(--bs-secondary-rgb), var(--bs-text-opacity)) !important;
+  text-decoration: none;
 }
 
 .dataTable-sorter::before,
