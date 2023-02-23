@@ -6,9 +6,15 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header card-header-primary">
-                        Usuarios
-                        <!-- <p class="card-category">usuarios lista</p> -->
+                    <div class="card-header">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span id="card_title">Usuarios</span>
+                            <div class="float-right">
+                                <a href="{{ route('users.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                                    <i class="fas fa-add"></i> {{ __('Nuevo') }}
+                                </a>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-body">
                         @if(session('success'))
@@ -16,14 +22,9 @@
                             {{session('success')}}
                         </div>
                         @endif
-                        <div class = "row">
-                            <div class="col-12 text-left">
-                                <a href="{{route('users.create')}}" class="btn btn-sm btn-primary my-4 float-end">Añadir Usuario</a>
-                            </div>
-                        </div>
                         <div class="table-responsive">
-                            <table class="table align-middle table-hover table-borderless">
-                                <thead class="bg-secondary text-white">
+                            <table id="datatablesSimple">
+                                <thead>
                                     <th>Nombre</th>
                                     <th>Apellido</th>
                                     <th>Tipo de Usuario</th>
